@@ -47,6 +47,10 @@ public class VolunteerSkillRecord{
        this.id=id;
        this.skillName=skillName;
        this.skillLevel=skillLevel;
-       this.
+       this.certified=certified;
+       this.updatedAt=updatedAt;
 
+}
+public VolunteerSkillRecord(){
+    
 }

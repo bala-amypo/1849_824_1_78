@@ -57,4 +57,12 @@ public class VolunteerProfile{
     public void setEmail(LocalDateTime createdAt){
         this.createdAt=createdAt;
     }
+    public VolunteerProfile(Long id,String volunteer,String fullName,String email,String phone,String availabilityStatus,LocalDateTime createdAt);
+    this.id=id;
+    this.volunteer=volunteer;
+    this.fullName=fullName;
+    this.email=email;
+    this.phone=phone;
+    this.availabilityStatus=availabilityStatus;
+    this.
 }
