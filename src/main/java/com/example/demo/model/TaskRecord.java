@@ -68,5 +68,13 @@ public class TaskRecord{
     public TaskRecord(Long id,String taskcode,String taskName,String requiredSkill,String requiredSkillLevel,String priority,String status,LocalDateTime createdAt);
     this.id=id;
     this.taskcode=taskcode;
-    this.taskName=ta
+    this.taskName=taskName;
+    this.requiredSkill=requiredSkill;
+    this.requiredSkillLevel=requiredSkillLevel;
+    this.priority=priority;
+    this.status=status;
+    this.createdAt=createdAt;
+}
+public TaskRecord(){
+    
 }

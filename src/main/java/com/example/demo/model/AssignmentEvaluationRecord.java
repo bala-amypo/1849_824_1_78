@@ -41,5 +41,6 @@ public class AssignmentEvaluationRecord{
     public void setEvaluatedAt(LocalDateTime evaluatedAt){
         this.evaluatedAt=evaluatedAt;
     }
+    public AssignmentEvaluationRecord(Long id,Long assignmentId,Integer rating,)
 
 }

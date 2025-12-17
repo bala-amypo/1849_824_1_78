@@ -49,4 +49,14 @@ public class TaskAssignmentRecord{
     public void setCreatedAt(LocalDateTime createdAt){
         this.createdAt=createdAt;
     }
+    public TaskAssignmentRecord(Long id,Long taskId,Long volunteerId,LocalDateTime assignedAt,String status,LocalDateTime createdAt);
+    this.id=id;
+    this.taskId=taskId;
+    this.volunteerId=volunteerId;
+    this.assignedAt=assignedAt;
+    this.status=status;
+    this.createdAt=createdAt;
+}
+public TaskAssignmentRecord(){
+    
 }
