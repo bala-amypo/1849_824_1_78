@@ -20,8 +20,8 @@ public class AssignmentEvaluationRecord{
     public Long getAssignmentId(){
         return assignmentId;
     }
-    public void setA(Long assignedId){
-        this.assignedId=assignedId;
+    public void setAssignmentId(Long assignmentId){
+        this.assignmentId=assignmentId;
     }
     public Integer getRating(){
         return rating;
@@ -44,7 +44,7 @@ public class AssignmentEvaluationRecord{
     }
     public AssignmentEvaluationRecord(Long id,Long assignmentId,Integer rating,String feedback,LocalDateTime evaluatedAt){
     this.id=id;
-    this.assignmentId=assignedId;
+    this.assignmentId=assignmentId;
     this.rating=rating;
     this.feedback=feedback;
     this.evaluatedAt=evaluatedAt;
