@@ -5,5 +5,5 @@ public class VolunteerSkillRecord{
     private String skillName;
     private String skillLevel;
     private Boolean certified;
-    private LocalDateTime updated
+    private LocalDateTime updatedAt;
 }
