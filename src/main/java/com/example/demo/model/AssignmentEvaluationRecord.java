@@ -1,4 +1,4 @@
-package.com.example.demo;
+package com.example.demo.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
@@ -14,13 +14,13 @@ public class AssignmentEvaluationRecord{
     public Long getId(){
         return id;
     }
-    public void setId(String id){
+    public void setId(Long id){
         this.id=id;
     }
-    public Long getAssignedId(){
-        return assignedId;
+    public Long getAssignmentId(){
+        return assignmentId;
     }
-    public void setAssignedId(Long assignedId){
+    public void setA(Long assignedId){
         this.assignedId=assignedId;
     }
     public Integer getRating(){
