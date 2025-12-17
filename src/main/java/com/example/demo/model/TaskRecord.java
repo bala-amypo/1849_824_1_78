@@ -56,10 +56,9 @@ public class TaskRecord{
     }
 
     public LocalDateTime getCreatedAt(){
-         return cre;
+         return createdAt;
     }
-    public void setEmail(LocalDateTime createdAt){
+    public void setCreatedAt(LocalDateTime createdAt){
         this.createdAt=createdAt;
     }
-}
 }
