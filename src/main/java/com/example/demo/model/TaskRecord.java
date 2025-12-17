@@ -21,31 +21,31 @@ public class TaskRecord{
     public void setTaskcode(String taskcode){
         this.taskcode=taskcode;
     }
-    public String getFullName(){
-        return fullName;
+    public String getTaskName(){
+        return taskName;
     }
-    public void setFullName(String fullName){
-        this.fullName=fullName;
-    }
-
-    public String getEmail(){
-         return email;
-    }
-    public void setEmail(String email){
-        this.email=email;
-    }
-    public String getPhone(){
-         return phone;
-    }
-    public void setPhone(String phone){
-        this.phone=phone;
+    public void setTaskName(String taskName){
+        this.taskName=taskName;
     }
 
-    public String getAvailabilityStatus(){
-         return availabilityStatus;
+    public String getRequiredSkill(){
+         return requiredSkill;
     }
-    public void setAvailabilityStatus(String availabilityStatus){
-        this.availabilityStatus=availabilityStatus;
+    public void setRequiredSkill(String requiredSkill){
+        this.requiredSkill=requiredSkill;
+    }
+    public String getRequiredSkillLevel(){
+         return requiredSkillLevel;
+    }
+    public void setRequiredSkillLevel(String requiredSkillLevel){
+        this.requiredSkillLevel=requiredSkillLevel;
+    }
+
+    public String getPriority(){
+         return priority;
+    }
+    public void setPriority(String priority){
+        this.priority=availabilityStatus;
     }
 
     public LocalDateTime getCreatedAt(){
