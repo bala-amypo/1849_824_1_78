@@ -1,6 +1,7 @@
 package.com.example.demo;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import java.time.LocalDateTime;
 @Entity
 public class AssignmentEvaluationRecord{
     @Id
@@ -41,7 +42,7 @@ public class AssignmentEvaluationRecord{
     public void setEvaluatedAt(LocalDateTime evaluatedAt){
         this.evaluatedAt=evaluatedAt;
     }
-    public AssignmentEvaluationRecord(Long id,Long assignmentId,Integer rating,String feedback,LocalDateTime evaluatedAt);
+    public AssignmentEvaluationRecord(Long id,Long assignmentId,Integer rating,String feedback,LocalDateTime evaluatedAt){
     this.id=id;
     this.assignmentId=assignedId;
     this.rating=rating;
@@ -49,5 +50,6 @@ public class AssignmentEvaluationRecord{
     this.evaluatedAt=evaluatedAt;
 }
 public AssignmentEvaluationRecord(){
-    
+
+}
 }
