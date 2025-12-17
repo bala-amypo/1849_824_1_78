@@ -1,5 +1,9 @@
 package.com.example.demo;
-public class AssignmentEvaliationRecord{
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+@Entity
+public class AssignmentEvaluationRecord{
+    @Id
     private Long id;
     private Long assignmentId;
     private Integer rating;

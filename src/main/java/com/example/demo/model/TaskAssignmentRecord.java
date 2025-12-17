@@ -1,5 +1,9 @@
 package.com.example.demo;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+@Entity
 public class TaskAssignmentRecord{
+    @Id
     private Long id;
     private Long taskId;
     private Long volunteerId;

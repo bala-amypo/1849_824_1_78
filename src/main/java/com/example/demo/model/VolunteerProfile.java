@@ -1,5 +1,9 @@
 package.com.example.demo.model;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+@Entity
 public class VolunteerProfile{
+    @Id
     private Long id;
     private String volunteer;
     private String fullName;

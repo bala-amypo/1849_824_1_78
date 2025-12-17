@@ -1,5 +1,9 @@
 package.com.example.demo.model;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+@Entity
 public class VolunteerSkillRecord{
+    @Id
     private Long id;
     private Long volunteerId;
     private String skillName;
@@ -39,4 +43,5 @@ public class VolunteerSkillRecord{
     public void setLocalDateTime(LocalDateTime updatedAt){
         this.updatedAt=updatedAt;
     }
+    
 }
