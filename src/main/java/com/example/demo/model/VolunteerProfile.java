@@ -11,19 +11,19 @@ public class VolunteerProfile{
     public Long getId(){
         return id;
     }
-    public void setId(){
+    public void setId(String id){
         this.id=id;
     }
     public String getVolunteer(){
         return volunteer;
     }
-    public void setVolunteer(){
-        this.Volunteer=;
+    public void setVolunteer(String volunteer){
+        this.volunteer=volunteer;
     }
     public String FullName(){
         return fullName;
     }
-    public void setFullName(){
-        this.id=
+    public void setFullName(String fullName){
+        this.fullName=fullName;
     }
 }
