@@ -16,25 +16,25 @@ public class AssignmentEvaliationRecord{
         return assignedId;
     }
     public void setAssignedId(Long assignedId){
-        this.volunteer=;
+        this.assignedId=assignedId;
     }
-    public String getFullName(){
-        return fullName;
+    public Integer getRating(){
+        return rating;
     }
-    public void setFullName(String fullName){
-        this.fullName=fullName;
+    public void setRating(Integer rating){
+        this.rating=rating;
     }
 
-    public String getEmail(){
-         return email;
+    public String getFeedback(){
+         return feedback;
     }
-    public void setEmail(String email){
-        this.email=email;
+    public void setFeedback(String feedback){
+        this.feedback=feedback;
     }
-    public String getPhone(){
-         return phone;
+    public LocalDateTime getEvaluatedAt(){
+         return evaluatedAt;
     }
-    public void setPhone(String phone){
+    public void setEvaluatedAt(LocalDateTime evaluatedAt){
         this.phone=phone;
     }
 
