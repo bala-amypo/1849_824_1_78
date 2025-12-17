@@ -35,20 +35,7 @@ public class AssignmentEvaliationRecord{
          return evaluatedAt;
     }
     public void setEvaluatedAt(LocalDateTime evaluatedAt){
-        this.phone=phone;
+        this.evaluatedAt=evaluatedAt;
     }
 
-    public String getAvailabilityStatus(){
-         return availabilityStatus;
-    }
-    public void setAvailabilityStatus(String availabilityStatus){
-        this.availabilityStatus=availabilityStatus;
-    }
-
-    public LocalDateTime getCreatedAt(){
-         return email;
-    }
-    public void setEmail(LocalDateTime createdAt){
-        this.createdAt=createdAt;
-    }
 }
