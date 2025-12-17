@@ -13,12 +13,6 @@ public class User{
         this.id=id;
     }
     public String getFullName(){
-        return volunte;
-    }
-    public void setVolunteer(String volunteer){
-        this.volunteer=volunteer;
-    }
-    public String getFullName(){
         return fullName;
     }
     public void setFullName(String fullName){
@@ -31,24 +25,17 @@ public class User{
     public void setEmail(String email){
         this.email=email;
     }
-    public String getPhone(){
-         return phone;
+    public String getPassword(){
+         return password;
     }
-    public void setPhone(String phone){
-        this.phone=phone;
-    }
-
-    public String getAvailabilityStatus(){
-         return availabilityStatus;
-    }
-    public void setAvailabilityStatus(String availabilityStatus){
-        this.availabilityStatus=availabilityStatus;
+    public void setPassword(String password){
+        this.password=password;
     }
 
-    public LocalDateTime getCreatedAt(){
-         return email;
+    public String getRole(){
+         return role;
     }
-    public void setEmail(LocalDateTime createdAt){
-        this.createdAt=createdAt;
+    public void setRole(String role){
+        this.role=role;
     }
 }
