@@ -5,5 +5,5 @@ public class TaskAssignmentRecord{
     private Long volunteerId;
     private LocalDateTime assignedAt;
     private String status;
-    pri
+    private LocalDateTime createdAt;
 }
