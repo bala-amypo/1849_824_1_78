@@ -6,7 +6,7 @@ public class VolunteerProfile{
     private String email;
     private String phone;
     private String availabilityStatus;
-    private LocalDataTime createdAt;
+    private LocalDateTime createdAt;
      
     public Long getId(){
         return id;
@@ -34,9 +34,23 @@ public class VolunteerProfile{
         this.email=email;
     }
     public String getPhone(){
+         return phone;
+    }
+    public void setPhone(String phone){
+        this.phone=phone;
+    }
+
+    public String getAvailabilityStatus(){
+         return availabilityStatus;
+    }
+    public void setAvailabilityStatus(String availabilityStatus){
+        this.availabilityStatus=availabilityStatus;
+    }
+
+    public LocalDateTime getCreatedAt(){
          return email;
     }
-    public void setEmail(String email){
-        this.email=email;
+    public void setEmail(LocalDateTime createdAt){
+        this.createdAt=createdAt;
     }
 }
