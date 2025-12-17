@@ -14,5 +14,16 @@ public class VolunteerProfile{
     public void setId(){
         this.id=id;
     }
-    public String get
+    public String getVolunteer(){
+        return volunteer;
+    }
+    public void setVolunteer(){
+        this.Volunteer=;
+    }
+    public String FullName(){
+        return fullName;
+    }
+    public void setFullName(){
+        this.id=
+    }
 }
