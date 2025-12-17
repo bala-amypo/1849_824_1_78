@@ -45,11 +45,18 @@ public class TaskRecord{
          return priority;
     }
     public void setPriority(String priority){
-        this.priority=availabilityStatus;
+        this.priority=priority;
+    }
+    public String getStatus(){
+        return status;
+    }
+    public void setStatus(String status){
+        this.status=status;
+
     }
 
     public LocalDateTime getCreatedAt(){
-         return email;
+         return cre;
     }
     public void setEmail(LocalDateTime createdAt){
         this.createdAt=createdAt;
