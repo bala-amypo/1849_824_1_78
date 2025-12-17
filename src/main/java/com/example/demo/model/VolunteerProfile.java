@@ -64,5 +64,8 @@ public class VolunteerProfile{
     this.email=email;
     this.phone=phone;
     this.availabilityStatus=availabilityStatus;
-    this.
+    this.createdAt=createdAt;
+}
+public VolunteerProfile(){
+    
 }

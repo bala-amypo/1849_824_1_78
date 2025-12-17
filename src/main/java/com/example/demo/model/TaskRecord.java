@@ -65,4 +65,8 @@ public class TaskRecord{
     public void setCreatedAt(LocalDateTime createdAt){
         this.createdAt=createdAt;
     }
+    public TaskRecord(Long id,String taskcode,String taskName,String requiredSkill,String requiredSkillLevel,String priority,String status,LocalDateTime createdAt);
+    this.id=id;
+    this.taskcode=taskcode;
+    this.taskName=ta
 }
