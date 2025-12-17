@@ -30,27 +30,13 @@ public class VolunteerSkillRecord{
     public Boolean getCertified(){
          return email;
     }
-    public void setEmail(String email){
-        this.email=email;
+    public void setEmail(Boolean certified ){
+        this.certified=certified;
     }
-    public String getPhone(){
-         return phone;
+    public LocalDateTime getLocalDateTime(){
+         return LocalDateTime;
     }
-    public void setPhone(String phone){
-        this.phone=phone;
-    }
-
-    public String getAvailabilityStatus(){
-         return availabilityStatus;
-    }
-    public void setAvailabilityStatus(String availabilityStatus){
-        this.availabilityStatus=availabilityStatus;
-    }
-
-    public LocalDateTime getCreatedAt(){
-         return email;
-    }
-    public void setEmail(LocalDateTime createdAt){
-        this.createdAt=createdAt;
+    public void setLocalDateTime(LocalDateTime updatedAt){
+        this.updatedAt=updatedAt;
     }
 }
