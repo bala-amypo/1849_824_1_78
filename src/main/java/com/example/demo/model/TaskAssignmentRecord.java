@@ -26,30 +26,23 @@ public class TaskAssignmentRecord{
         this.volunteerId=volunteerId;
     }
 
-    public getL getAssignedAt(){
-         return email;
+    public LocalDateTime getAssignedAt(){
+         return LocalDateTime;
     }
-    public void setEmail(String email){
-        this.email=email;
+    public void setAssignedAt(LocalDateTime assignedAt){
+        this.assignedAt=assignedAt;
     }
-    public String getPhone(){
-         return phone;
+    public String getStatus(){
+         return status;
     }
-    public void setPhone(String phone){
-        this.phone=phone;
-    }
-
-    public String getAvailabilityStatus(){
-         return availabilityStatus;
-    }
-    public void setAvailabilityStatus(String availabilityStatus){
-        this.availabilityStatus=availabilityStatus;
+    public void setStatus(String status){
+        this.status=status;
     }
 
     public LocalDateTime getCreatedAt(){
-         return email;
+         return createdAt;
     }
-    public void setEmail(LocalDateTime createdAt){
+    public void setCreatedAt(LocalDateTime createdAt){
         this.createdAt=createdAt;
     }
 }
