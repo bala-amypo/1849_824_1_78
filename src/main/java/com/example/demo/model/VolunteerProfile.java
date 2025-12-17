@@ -8,4 +8,11 @@ public class VolunteerProfile{
     private String availabilityStatus;
     private LocalDataTime createdAt;
      
+    public Long getId(){
+        return id;
+    }
+    public void setId(){
+        this.id=id;
+    }
+    public String get
 }
