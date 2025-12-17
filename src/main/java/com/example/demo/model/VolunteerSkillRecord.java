@@ -43,7 +43,10 @@ public class VolunteerSkillRecord{
     public void setLocalDateTime(LocalDateTime updatedAt){
         this.updatedAt=updatedAt;
     }
-    public VolunteerSkillRecord(Long id,String skillName,String skillLevel,Boolean certified,LocalDateTime updatedAt)
+    public VolunteerSkillRecord(Long id,String skillName,String skillLevel,Boolean certified,LocalDateTime updatedAt);
        this.id=id;
-       
+       this.skillName=skillName;
+       this.skillLevel=skillLevel;
+       this.
+
 }
