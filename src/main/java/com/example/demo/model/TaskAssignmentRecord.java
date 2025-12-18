@@ -1,6 +1,7 @@
 package.com.example.demo;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.LocalDateTime;
 @Entity
 public class TaskAssignmentRecord{
     @Id
@@ -14,7 +15,7 @@ public class TaskAssignmentRecord{
     public Long getId(){
         return id;
     }
-    public void setId(String id){
+    public void setId(Long id){
         this.id=id;
     }
     public Long getTaskId(){
@@ -31,7 +32,7 @@ public class TaskAssignmentRecord{
     }
 
     public LocalDateTime getAssignedAt(){
-         return LocalDateTime;
+         return assignedAt;
     }
     public void setAssignedAt(LocalDateTime assignedAt){
         this.assignedAt=assignedAt;
