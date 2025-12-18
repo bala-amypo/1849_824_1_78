@@ -1,56 +1,86 @@
-package.com.example.demo.model;
+package com.example.demo.model;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import java.time.LocalDateTime;
+
 @Entity
-public class VolunteerSkillRecord{
+public class VolunteerSkillRecord {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long volunteerId;
     private String skillName;
     private String skillLevel;
     private Boolean certified;
     private LocalDateTime updatedAt;
 
-      
-    public Long getId(){
+    // ✅ No-args constructor (required by JPA)
+    public VolunteerSkillRecord() {
+    }
+
+    // ✅ All-args constructor
+    public VolunteerSkillRecord(Long id, Long volunteerId,
+                                String skillName, String skillLevel,
+                                Boolean certified, LocalDateTime updatedAt) {
+        this.id = id;
+        this.volunteerId = volunteerId;
+        this.skillName = skillName;
+        this.skillLevel = skillLevel;
+        this.certified = certified;
+        this.updatedAt = updatedAt;
+    }
+
+    // Getters & Setters
+    public Long getId() {
         return id;
     }
-    public void setId(String id){
-        this.id=id;
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    public Long getVolunteerId(){
+
+    public Long getVolunteerId() {
         return volunteerId;
     }
-    public void setVolunteerId(String volunteerId){
-        this.volunteerId=volunteerId;
+
+    public void setVolunteerId(Long volunteerId) {
+        this.volunteerId = volunteerId;
     }
-    public String getSkillName(){
+
+    public String getSkillName() {
         return skillName;
     }
-    public void setSkillLevel(String skillLevel){
-        this.skillLevel=skillLevel;
+
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
     }
 
-    public Boolean getCertified(){
-         return email;
+    public String getSkillLevel() {
+        return skillLevel;
     }
-    public void setEmail(Boolean certified ){
-        this.certified=certified;
-    }
-    public LocalDateTime getLocalDateTime(){
-         return LocalDateTime;
-    }
-    public void setLocalDateTime(LocalDateTime updatedAt){
-        this.updatedAt=updatedAt;
-    }
-    public VolunteerSkillRecord(Long id,String skillName,String skillLevel,Boolean certified,LocalDateTime updatedAt);
-       this.id=id;
-       this.skillName=skillName;
-       this.skillLevel=skillLevel;
-       this.certified=certified;
-       this.updatedAt=updatedAt;
 
-}
-public VolunteerSkillRecord(){
+    public void setSkillLevel(String skillLevel) {
+        this.skillLevel = skillLevel;
+    }
 
+    public Boolean getCertified() {
+        return certified;
+    }
+
+    public void setCertified(Boolean certified) {
+        this.certified = certified;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
