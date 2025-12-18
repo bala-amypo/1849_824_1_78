@@ -1,6 +1,6 @@
-// package com.example.demo.repository;
-// import org.springframework.data.jap.repository.JpaRepository;
-// import com.example.demo.model.TaskAssignmentRecordRepository;
-// public interface TaskAssignmentRecordRepository extends JpaRepository< TaskAssignmentRecordRepository,Long>{
+package com.example.demo.repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.demo.model.TaskAssignmentRecord;
+public interface TaskAssignmentRecordRepository extends JpaRepository< TaskAssignmentRecord,Long>{
     
-// }
+}
