@@ -58,5 +58,6 @@ public class TaskAssignmentRecord{
     this.createdAt=createdAt;
 }
 public TaskAssignmentRecord(){
+    
 }
 }
