@@ -6,6 +6,6 @@ public interface AssignmentEvaluationService
 
 
 {
-    public AssignmentEvaluation registerAssignmentEvaluation(AssignmentEvaluation req);
+    public AssignmentEvaluationRecord evaluateAssignment(evaluateAssignment req);
     public AssignmentEvaluation loginAssignmentEvaluation( AssignmentEvaluation req);
 }
