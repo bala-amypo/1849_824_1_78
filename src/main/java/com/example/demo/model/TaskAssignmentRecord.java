@@ -1,7 +1,7 @@
 package com.example.demo.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import java.persistence.LocalDateTime;
+import java.time.LocalDateTime;
 @Entity
 public class TaskAssignmentRecord{
     @Id
