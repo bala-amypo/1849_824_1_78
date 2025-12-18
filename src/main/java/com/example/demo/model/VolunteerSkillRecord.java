@@ -19,11 +19,9 @@ public class VolunteerSkillRecord {
     private Boolean certified;
     private LocalDateTime updatedAt;
 
-    // ✅ No-args constructor (required by JPA)
     public VolunteerSkillRecord() {
     }
 
-    // ✅ All-args constructor
     public VolunteerSkillRecord(Long id, Long volunteerId,
                                 String skillName, String skillLevel,
                                 Boolean certified, LocalDateTime updatedAt) {
@@ -35,7 +33,6 @@ public class VolunteerSkillRecord {
         this.updatedAt = updatedAt;
     }
 
-    // Getters & Setters
     public Long getId() {
         return id;
     }
