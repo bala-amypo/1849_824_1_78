@@ -1,7 +1,7 @@
 package com.example.demo.repository;
-import org.springframework.data.jap.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.model.AssignmentEvaluationRecord;
-public interface AssignmentEvaliationRecordRepository extends JpaRepository<AssignmentEvaluationRecord,Long>{
+public interface AssignmentEvaluationRecordRepository extends JpaRepository<AssignmentEvaluationRecord,Long>{
     
 }
 
