@@ -1,70 +1,81 @@
-//  package com.example.demo.model;
+ package com.example.demo.model;
 
-// import jakarta.persistence.Entity;
-// import jakarta.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 
-// @Entity
-// public class User {
+@Entity
+@Table(name = "users")
+public class User {
 
-//     @Id
-//     private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-//     private String fullName;
-//     private String email;
-//     private String password;
-//     private String role;
+    @Column(nullable = false)
+    private String fullName;
 
-//     // No-args constructor (REQUIRED by JPA)
-//     public User() {
-//     }
+    @Column(nullable = false, unique = true)
+    private String email;
 
-//     // Parameterized constructor
-//     public User(Long id, String fullName, String email, String password, String role) {
-//         this.id = id;
-//         this.fullName = fullName;
-//         this.email = email;
-//         this.password = password;
-//         this.role = role;
-//     }
+    @Column(nullable = false)
+    private String password;
 
-//     // Getters and Setters
-//     public Long getId() {
-//         return id;
-//     }
+    @Column(nullable = false)
+    private String role;
 
-//     public void setId(Long id) {   
-//         this.id = id;
-//     }
+    
+    public User() {
+    }
 
-//     public String getFullName() {
-//         return fullName;
-//     }
+    public User(Long id, String fullName, String email, String password, String role) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
-//     public void setFullName(String fullName) {
-//         this.fullName = fullName;
-//     }
+    public Long getId() {
+        return id;
+    }
 
-//     public String getEmail() {
-//         return email;
-//     }
+    public void setId(Long id) {   
+        this.id = id;
+    }
 
-//     public void setEmail(String email) {
-//         this.email = email;
-//     }
+    public String getFullName() {
+        return fullName;
+    }
 
-//     public String getPassword() {
-//         return password;
-//     }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
-//     public void setPassword(String password) {
-//         this.password = password;
-//     }
+    public String getEmail() {
+        return email;
+    }
 
-//     public String getRole() {
-//         return role;
-//     }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-//     public void setRole(String role) {
-//         this.role = role;
-//     }
-// }
+    public String getPassword() {
+        return password;
+    }
+ 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+ 
+    public String getRole() {
+        return role;
+    }
+ 
+    public void setRole(String role) {
+        this.role = role;
+    }
+}
