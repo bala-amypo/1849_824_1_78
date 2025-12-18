@@ -1,6 +1,6 @@
-// package com.example.demo.repository;
-// import org.springframework.data.jap.repository.JpaRepository;
-// import com.example.demo.model.VolunteerProfileRepository;
-// public interface  VolunteerProfileRepository extends JpaRepository<  VolunteerProfileRepository,Long>{
+package com.example.demo.repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.demo.model.VolunteerProfile;
+public interface  VolunteerProfileRepository extends JpaRepository<  VolunteerProfile,Long>{
     
-// }
+}
