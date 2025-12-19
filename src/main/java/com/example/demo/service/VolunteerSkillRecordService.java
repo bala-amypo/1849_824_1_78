@@ -1,9 +1,9 @@
 package com.example.demo.service;
-import com.example.demo.entity.VolunteerSkill;
+import com.example.demo.entity.VolunteerSkillRecord;
 
 public interface   VolunteerSkillRecordService
 {
-    VolunteerSkillRecordServices createVolunteerSkill(VolunteerSkill vs);
+    VolunteerSkillRecordServices createVolunteerSkillRecord(VolunteerSkillRecord vs);
 
 
 }
