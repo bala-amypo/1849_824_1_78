@@ -1,20 +1,9 @@
-package com.example.demo.service.impl;
-import com.example.demo.repository. VolunteerProfileRepository;
-import com.example.demo.entity. VolunteerProfile;
-import com.example.demo.service. VolunteerProfileService;
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.example.demo.service;
+import com.example.demo.entity.User;
 
-
-@Service
-public class  VolunteerProfileServiceImpl implements  VolunteerProfileService{
-
-@Autowired
- VolunteerProfileRepository vps;
-public VolunteerProfile createVolunteerProfile( VolunteerProfile vp){
-
-    return vps.save(vp);
-}
+public interface   VolunteerService
+{
+    VolunteerProfileServices createUser(VolunteerProfile vp);
 
 
 }

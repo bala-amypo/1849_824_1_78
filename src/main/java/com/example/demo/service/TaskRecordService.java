@@ -1,9 +1,9 @@
 package com.example.demo.service;
-import com.example.demo.entity.TaskAssignment;
+import com.example.demo.entity.TaskRecord;
 
 public interface   TaskRecordService
 {
-    TaskRecordServices createTaskAssignment(TaskAssignment ts);
+    TaskRecordServices createTaskRecord(TaskRecord tr);
 
 
 }
