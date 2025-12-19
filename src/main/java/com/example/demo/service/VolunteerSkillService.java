@@ -11,9 +11,9 @@ public class  VolunteerSkillServiceImpl implements  VolunteerSkillService{
 
 @Autowired
  VolunteerSkillRepository vsr;
-public  VolunteerSkill create VolunteerSkill( VolunteerSkill ae){
+public  VolunteerSkill create VolunteerSkill( VolunteerSkill vs){
 
-    return aer.save(ae);
+    return vsr.save(vs);
 }
 
 
