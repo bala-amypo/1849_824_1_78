@@ -1,21 +1,17 @@
 package com.example.demo.controller;
-
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.model.User;
+import com.example.demo.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.entity.User;
-import com.example.demo.service.UserService;
 
 @RestController
-public class UserController {
-
+public class AuthController{
     @Autowired
-    private UserService userService;
-
-    @PostMapping("/users")
-    public User addUser(@RequestBody User user) {
-        return userService.createUser(user);
+    private UserService u;
+    @PostMapping("/user")
+    public User addUser(@RequestBody User us){
+        return u.createUser(us);
     }
 }
