@@ -11,7 +11,7 @@ public class TaskRecordImpl implements TaskRecordService{
 
 @Autowired
 TaskRecordRepository trr;
-public  TaskRecord createAssignment(TaskRecord tr){
+public  TaskRecord createTaskRecord(TaskRecord tr){
 
     return trr.save(tr);
 }

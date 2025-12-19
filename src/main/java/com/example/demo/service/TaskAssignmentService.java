@@ -11,7 +11,7 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService{
 
 @Autowired
 TaskAssignmentRepository tar;
-public TaskAssignment createAssignment(TaskAssignment ta){
+public TaskAssignment createTaskAssignment(TaskAssignment ta){
 
     return tar.save(ta);
 }

@@ -11,7 +11,7 @@ public class  VolunteerProfileServiceImpl implements  VolunteerProfileService{
 
 @Autowired
  VolunteerProfileRepository vps;
-public VolunteerProfile createAssignment( VolunteerProfile vp){
+public VolunteerProfile createVolunteerProfile( VolunteerProfile vp){
 
     return vps.save(vp);
 }
