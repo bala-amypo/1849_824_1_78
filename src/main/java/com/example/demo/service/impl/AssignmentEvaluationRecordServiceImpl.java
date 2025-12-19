@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Service
-public class AssignmentEvaluationRecordServiceImpl implements AssignmentEvaluationService{
+public class AssignmentEvaluationRecordServiceImpl implements AssignmentEvaluationRecordService{
 
 @Autowired
-AssignmentEvaluationRepository aer;
-public AssignmentEvaluation createAssignmentEvaluation(AssignmentEvaluation ae){
+AssignmentEvaluationRecordRepository aer;
+public AssignmentEvaluationRecord createAssignmentEvaluationRecord(AssignmentEvaluationRecord ae){
 
     return aer.save(ae);
 }
