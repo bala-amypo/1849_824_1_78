@@ -11,7 +11,7 @@ public class AssignmentEvaluationRecordController{
     @Autowired
     private AssignmentEvaluationRecordService a;
     @PostMapping("/AssignmentEvaluationRecord")
-    public AssignmentEvaluationRecord addAssignmentEvaluation(@RequestBody AssignmentEvaluationRecord as){
+    public AssignmentEvaluationRecord addAssignmentEvaluationRecord(@RequestBody AssignmentEvaluationRecord as){
         return a.createAssignmentEvaluationRecord(as);
     }
 }
