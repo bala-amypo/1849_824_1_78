@@ -9,9 +9,9 @@ import org.springframework.web.bind.annonation.RequestBody;
 @RestController
 public class  TaskAssignment{
     @Autowired
-    TaskAssignmentService ae;
+    TaskAssignmentService tas;
     @PostMapping("/AssignmentEvaluation")
     public  TaskAssignmentService add  TaskAssignmentService(@RequestBody   TaskAssignmentService ta){
-        return gs.create  TaskAssignmentService(ta);
+        return tas.create  TaskAssignmentService(ta);
     }
 }

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annonation.RequestBody;
 @RestController
 public class  AssignmentEvaluation{
     @Autowired
-    AssignmentEvaluationService ae;
+    AssignmentEvaluationService aes;
     @PostMapping("/AssignmentEvaluation")
     public Garage addAssignmentEvaluation(@RequestBody AssignmentEvaluation ae){
-        return gs.createAssignmentEvaluation(ae);
+        return aes.createAssignmentEvaluation(ae);
     }
 }
