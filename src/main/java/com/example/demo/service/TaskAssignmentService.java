@@ -1,5 +1,5 @@
 package com.example.demo.service;
-import com.example.demo.entity.TaskAssignment;
+import com.example.demo.model.TaskAssignment;
 
 public interface   TaskAssignmentService
 {

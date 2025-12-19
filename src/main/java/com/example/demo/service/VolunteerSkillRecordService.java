@@ -1,5 +1,5 @@
 package com.example.demo.service;
-import com.example.demo.entity.VolunteerSkillRecord;
+import com.example.demo.model.VolunteerSkillRecord;
 
 public interface   VolunteerSkillRecordService
 {

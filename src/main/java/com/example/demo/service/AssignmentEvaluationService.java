@@ -1,5 +1,5 @@
 package com.example.demo.service;
-import com.example.demo.entity.AssignmentEvaluation;
+import com.example.demo.model.AssignmentEvaluation;
 
 public interface  AssignmentEvaluationService
 {
