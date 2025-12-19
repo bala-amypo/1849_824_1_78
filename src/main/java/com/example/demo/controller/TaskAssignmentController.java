@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 public class AuthController{
     @Autowired
-    private TaskAssignmentService a;
-    @PostMapping("/AssignmentEvaluation")
-    public User addUser(@RequestBody AssignmentEvaluation as){
-        return a.createUser(as);
+    private TaskAssignmentService t;
+    @PostMapping("/TaskAssignment")
+    public User addUser(@RequestBody TaskAssignment ta){
+        return t.createUser(ta);
     }
 }
