@@ -11,7 +11,7 @@ public class  TaskAssignment{
     @Autowired
     TaskAssignmentService tas;
     @PostMapping("/AssignmentEvaluation")
-    public  TaskAssignmentService add  TaskAssignmentService(@RequestBody   TaskAssignmentService ta){
+    public  TaskAssignmentService addTaskAssignmentService(@RequestBody   TaskAssignmentService ta){
         return tas.create  TaskAssignmentService(ta);
     }
 }
