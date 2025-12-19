@@ -1,17 +1,21 @@
 package com.example.demo.controller;
-import org.springframework.web.bind.annonation.RestController;
-import org.springframework.beans.factory.annonation.Autowired;
-import com.example.demo.entity.TaskAssignment;
-import com.example.demo.service.TaskAssignmentService;
-import org.springframework.web.bind.annonation.PostMapping;
-import org.springframework.web.bind.annonation.RequestBody;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entity.VolunteerProfile;
+import com.example.demo.service.VolunteerProfileService;
 
 @RestController
-public class  TaskAssignment{
+public class VolunteerProfileController {
+
     @Autowired
-    TaskAssignmentService tas;
-    @PostMapping("/AssignmentEvaluation")
-    public  TaskAssignmentService addTaskAssignmentService(@RequestBody   TaskAssignmentService ta){
-        return tas.create  TaskAssignmentService(ta);
+    private VolunteerProfileService volunteerProfileService;
+
+    @PostMapping("/volunteers")
+    public VolunteerProfile addVolunteer(@RequestBody VolunteerProfile volunteerProfile) {
+        return volunteerProfileService.createVolunteer(volunteerProfile);
     }
 }
