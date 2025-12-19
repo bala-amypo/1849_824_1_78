@@ -11,7 +11,7 @@ public class AuthController{
     @Autowired
     private VolunteerProfileService v;
     @PostMapping("/VolunteerProfile")
-    public VolunteerProfile addVolunteerProfile(@RequestBody VolunteerProfile us){
+    public VolunteerProfile addVolunteerProfile(@RequestBody VolunteerProfile vp){
         return v.createVolunteerProfile(vp);
     }
 }
