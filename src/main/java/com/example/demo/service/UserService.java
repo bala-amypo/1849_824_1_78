@@ -1,9 +1,9 @@
 package com.example.demo.service;
-import com.example.demo.model.UserService;
+import com.example.demo.model.UserServicd;
 
 public interface   UserService
 {
-    UserService createUserService(UserService us);
+    UserServices createUserService(UserService us);
 
 
 }
