@@ -5,17 +5,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.VolunteerProfile;
-import com.example.demo.service.VolunteerProfileService;
+import com.example.demo.entity.TaskAssignmentRecord;
+import com.example.demo.service.TaskAssignmentService;
 
 @RestController
-public class VolunteerProfileController {
+public class TaskAssignmentController {
 
     @Autowired
-    private VolunteerProfileService volunteerProfileService;
+    private TaskAssignmentService taskAssignmentService;
 
-    @PostMapping("/volunteers")
-    public VolunteerProfile addVolunteer(@RequestBody VolunteerProfile volunteerProfile) {
-        return volunteerProfileService.createVolunteer(volunteerProfile);
+    @PostMapping("/task-assignments")
+    public TaskAssignmentRecord assignTask(@RequestBody TaskAssignmentRecord record) {
+        return taskAssignmentService.assignTask(record);
     }
 }
