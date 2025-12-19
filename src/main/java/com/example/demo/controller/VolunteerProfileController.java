@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-public class AuthController{
+public class VolunteerProfileController{
     @Autowired
     private VolunteerProfileService v;
     @PostMapping("/VolunteerProfile")

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-public class AuthController{
+public class UserController{
     @Autowired
     private UserService u;
     @PostMapping("/user")
