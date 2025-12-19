@@ -11,7 +11,7 @@ public class   TaskRecord{
     @Autowired
     TaskRecordService trs;
     @PostMapping("/TaskRecord")
-    public  TaskAssignmentService addTaskRecordService(@RequestBody   TaskAssignmentService tr){
+    public  TaskRecordService addTaskRecordService(@RequestBody   TaskAssignmentService tr){
         return trs.create  TaskRecordService(tr);
     }
 }
