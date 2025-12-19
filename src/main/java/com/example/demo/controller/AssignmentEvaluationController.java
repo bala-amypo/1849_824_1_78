@@ -1,17 +1,23 @@
 package com.example.demo.controller;
-import org.springframework.web.bind.annonation.RestController;
-import org.springframework.beans.factory.annonation.Autowired;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.demo.entity.AssignmentEvaluation;
 import com.example.demo.service.AssignmentEvaluationService;
-import org.springframework.web.bind.annonation.PostMapping;
-import org.springframework.web.bind.annonation.RequestBody;
 
 @RestController
-public class  AssignmentEvaluation{
+public class AssignmentEvaluationController {
+
     @Autowired
-    AssignmentEvaluationService aes;
-    @PostMapping("/AssignmentEvaluation")
-    public Garage addAssignmentEvaluation(@RequestBody AssignmentEvaluation ae){
-        return aes.createAssignmentEvaluation(ae);
+    private AssignmentEvaluationService assignmentEvaluationService;
+
+    @PostMapping("/assignment-evaluations")
+    public AssignmentEvaluation addEvaluation(
+            @RequestBody AssignmentEvaluation evaluation) {
+
+        return assignmentEvaluationService.createEvaluation(evaluation);
     }
 }
