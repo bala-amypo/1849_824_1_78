@@ -1,19 +1,19 @@
 package com.example.demo.service.impl;
-import com.example.demo.repository.TaskAssignmentRepository;
+import com.example.demo.repository.TaskRecordRepository;
 import com.example.demo.entity.TaskAssignment;
-import com.example.demo.service.TaskAssignmentService;
+import com.example.demo.service.TaskRecordService;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Service
-public class TaskAssignmentServiceImpl implements TaskAssignmentService{
+public class TaskRecordImpl implements TaskRecordService{
 
 @Autowired
-TaskAssignmentRepository trs;
-public TaskAssignment createAssignment(TaskAssignment ta){
+TaskRecordRepository trr;
+public  TaskRecord createAssignment(TaskRecord tr){
 
-    return trs.save(ta);
+    return trr.save(tr);
 }
 
 
