@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class  UserServiceImpl implements  UserService{
 
 @Autowired
-AssignmentEvaluationRepository uss;
+UserRepository uss;
 public  User createUser( User us){
 
     return uss.save(us);
