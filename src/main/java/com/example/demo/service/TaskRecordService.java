@@ -3,7 +3,7 @@ import com.example.demo.model.TaskRecord;
 
 public interface   TaskRecordService
 {
-    TaskRecordServices createTaskRecord(TaskRecord tr);
+    TaskRecord createTaskRecord(TaskRecord tr);
 
 
 }
