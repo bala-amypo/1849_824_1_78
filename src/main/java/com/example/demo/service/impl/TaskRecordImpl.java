@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 import com.example.demo.repository.TaskRecordRepository;
-import com.example.demo.entity.TaskAssignment;
+import com.example.demo.model.TaskAssignment;
 import com.example.demo.service.TaskRecordService;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
