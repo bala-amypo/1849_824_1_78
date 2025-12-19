@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Service
-public class TaskRecordImpl implements TaskRecordService{
+public class TaskRecordServiceImpl implements TaskRecordService{
 
 @Autowired
 TaskRecordRepository trr;
