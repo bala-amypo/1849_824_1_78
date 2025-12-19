@@ -11,7 +11,7 @@ public class VolunteerSkillRecordController{
     @Autowired
     private VolunteerSkillService vo;
     @PostMapping("/VolunteerProfile")
-    public VolunteerProfile addVolunteerSkill(@RequestBody VolunteerSkill vs){
+    public VolunteerSkillRecord addVolunteerSkill(@RequestBody VolunteerSkillRecord vs){
         return vo.createVolunteerSkill(vs);
     }
 }
