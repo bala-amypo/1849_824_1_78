@@ -11,7 +11,7 @@ public class AssignmentEvaluationServiceImpl implements AssignmentEvaluationServ
 
 @Autowired
 AssignmentEvaluationRepository gr;
-public AssignmentEvaluation createGarage(Garage gar){
+public AssignmentEvaluation createAssignmentEvaluation(AssignmentEvaluation ae){
 
     return gr.save(gar);
 }
