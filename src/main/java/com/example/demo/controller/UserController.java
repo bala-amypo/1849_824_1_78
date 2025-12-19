@@ -1,17 +1,21 @@
 package com.example.demo.controller;
-import org.springframework.web.bind.annonation.RestController;
-import org.springframework.beans.factory.annonation.Autowired;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
-import org.springframework.web.bind.annonation.PostMapping;
-import org.springframework.web.bind.annonation.RequestBody;
 
 @RestController
-public class   TaskRecord{
+public class UserController {
+
     @Autowired
-    TaskRecordService uss;
-    @PostMapping("/TaskRecord")
-    public  UserService addTaskRecordService(@RequestBody   UserService us){
-        return uss.create  UserService(us);
+    private UserService userService;
+
+    @PostMapping("/users")
+    public User addUser(@RequestBody User user) {
+        return userService.createUser(user);
     }
 }
