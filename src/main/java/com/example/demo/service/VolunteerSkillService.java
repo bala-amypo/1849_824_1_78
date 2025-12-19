@@ -1,20 +1,9 @@
-package com.example.demo.service.impl;
-import com.example.demo.repository. VolunteerSkillRepository;
-import com.example.demo.entity. VolunteerSkill;
-import com.example.demo.service.VolunteerSkillService;
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.example.demo.service;
+import com.example.demo.entity.VolunteerSkill;
 
-
-@Service
-public class  VolunteerSkillServiceImpl implements  VolunteerSkillService{
-
-@Autowired
- VolunteerSkillRepository vsr;
-public  VolunteerSkill createVolunteerSkill( VolunteerSkill vs){
-
-    return vsr.save(vs);
-}
+public interface   VolunteerSkillService
+{
+    VolunteerSkillServices createVolunteerSkill(VolunteerSkill vs);
 
 
 }

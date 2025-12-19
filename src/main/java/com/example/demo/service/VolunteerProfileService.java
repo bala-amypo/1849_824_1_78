@@ -1,9 +1,9 @@
 package com.example.demo.service;
-import com.example.demo.entity.User;
+import com.example.demo.entity.VolunteerProfile;
 
-public interface   VolunteerService
+public interface   VolunteerProfileService
 {
-    VolunteerProfileServices createUser(VolunteerProfile vp);
+    VolunteerProfileServices createVolunteerProfile(VolunteerProfile vp);
 
 
 }
