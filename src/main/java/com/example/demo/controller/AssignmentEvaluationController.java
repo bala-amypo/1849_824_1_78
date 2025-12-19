@@ -12,6 +12,6 @@ public class AuthController{
     private AssignmentEvaluationService a;
     @PostMapping("/AssignmentEvaluation")
     public AssignmentEvaluation addAssignmentEvaluation(@RequestBody AssignmentEvaluation as){
-        return a.createUser(as);
+        return a.createAssignmentEvaluation(as);
     }
 }
