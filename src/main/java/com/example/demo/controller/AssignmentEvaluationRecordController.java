@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-public class AssignmentEvaluationRecodeController{
+public class AssignmentEvaluationRecordController{
     @Autowired
     private AssignmentEvaluationRecordService a;
     @PostMapping("/AssignmentEvaluationRecord")
