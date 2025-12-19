@@ -1,17 +1,19 @@
 package com.example.demo.controller;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import com.example.demo.model.TaskRecord;
 import com.example.demo.service.TaskRecordService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class TaskRecordController{
+@RequestMapping("/tasks")
+public class TaskRecordController {
+
     @Autowired
-    private TaskRecord ts;
-    @PostMapping("/TaskRecord")
-    public TaskRecord addTaskRecord(@RequestBody TaskRecord  tr){
-        return ts.createTaskRecord(tr);
+    private TaskRecordService taskRecordService;
+
+    @PostMapping
+    public TaskRecord createTask(@RequestBody TaskRecord taskRecord) {
+        return taskRecordService.createTaskRecord(taskRecord);
     }
 }
