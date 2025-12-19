@@ -1,17 +1,21 @@
 package com.example.demo.controller;
-import org.springframework.web.bind.annonation.RestController;
-import org.springframework.beans.factory.annonation.Autowired;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.demo.entity.VolunteerSkillRecord;
-import com.example.demo.service. VolunteerSkillRecordService;
-import org.springframework.web.bind.annonation.PostMapping;
-import org.springframework.web.bind.annonation.RequestBody;
+import com.example.demo.service.VolunteerSkillRecordService;
 
 @RestController
-public class    VolunteerSkillRecord{
+public class VolunteerSkillRecordController {
+
     @Autowired
-    VolunteerSkillRecordService vsr;
-    @PostMapping("/VolunteerSkillRecord")
-    public  VolunteerSkillRecordService addVolunteerSkillRecordService(@RequestBody    VolunteerSkillRecordService vs){
-        return vsr.create  VolunteerSkillRecordService(vp);
+    private VolunteerSkillRecordService skillService;
+
+    @PostMapping("/volunteer-skills")
+    public VolunteerSkillRecord addSkill(@RequestBody VolunteerSkillRecord skill) {
+        return skillService.createSkill(skill);
     }
 }
