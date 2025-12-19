@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AssignmentEvaluationServiceImpl implements AssignmentEvaluationService{
 
 @Autowired
-AssignmentEvaluationRepository gr;
+AssignmentEvaluationRepository aer;
 public AssignmentEvaluation createAssignmentEvaluation(AssignmentEvaluation ae){
 
-    return gr.save(gar);
+    return aer.save(ae);
 }
 
 

@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TaskAssignmentServiceImpl implements TaskAssignmentService{
 
 @Autowired
-TaskAssignmentRepository tar;
+TaskAssignmentRepository trs;
 public TaskAssignment createAssignment(TaskAssignment ta){
 
-    return tar.save(ta);
+    return trs.save(ta);
 }
 
 
