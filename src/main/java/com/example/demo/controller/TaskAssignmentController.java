@@ -11,7 +11,7 @@ public class AuthController{
     @Autowired
     private TaskAssignmentService t;
     @PostMapping("/TaskAssignment")
-    public User addTaskAssignment(@RequestBody TaskAssignment ta){
-        return t.createUser(ta);
+    public TaskAssignment addTaskAssignment(@RequestBody TaskAssignment ta){
+        return t.createTaskAssignment(ta);
     }
 }
