@@ -14,4 +14,8 @@ public class VolunteerSkillRecordController{
     public VolunteerSkillRecord addVolunteerSkillRecord(@RequestBody VolunteerSkillRecord vs){
         return vo.createVolunteerSkillRecord(vs);
     }
+    @GetMapping("/{id}")
+    public VolunteerSkillById volunteerId(@PathVariable Long id){
+        return vo.getSkillById(id);
+}
 }
