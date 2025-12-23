@@ -17,7 +17,7 @@ public class VolunteerProfileController{
     public VolunteerProfile addVolunteerProfile(@RequestBody VolunteerProfile vp){
         return v.createVolunteerProfile(vp);
     }
-    @GetMappping("/{id}")
+    @GetMapping("/{id}")
     public VolunteerProfile getById(@PathVariable Long id){
         return v.getVolunteerById(id);
     }
