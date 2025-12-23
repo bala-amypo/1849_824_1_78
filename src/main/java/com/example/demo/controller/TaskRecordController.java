@@ -16,7 +16,5 @@ public class TaskRecordController {
     public TaskRecord createTask(@RequestBody TaskRecord taskRecord) {
         return taskRecordService.createTaskRecord(taskRecord);
     }
-    @GetMapping("/{id}")
-    public VolunteerProfile getById(@PathVariable Long id){
-        return v.getVolunteerById(id);
+    
 }
