@@ -21,5 +21,6 @@ public class VolunteerProfileController{
     public VolunteerProfile getById(@PathVariable Long id){
         return v.getVolunteerById(id);
     }
-
+    @PutMapping("/update/{id}")
+    publilc VolunteerProfile changeAvail(Long id,String availabilityStatus);
 }
