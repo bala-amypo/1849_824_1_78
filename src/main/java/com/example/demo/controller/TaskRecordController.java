@@ -16,5 +16,7 @@ public class TaskRecordController {
     public TaskRecord createTask(@RequestBody TaskRecord taskRecord) {
         return taskRecordService.createTaskRecord(taskRecord);
     }
-    
+     @GetMapping("/{id}")
+    public  TaskRecord getById(@PathVariable Long id){
+        return taskRecord.getTaskRecordById(id);
 }
