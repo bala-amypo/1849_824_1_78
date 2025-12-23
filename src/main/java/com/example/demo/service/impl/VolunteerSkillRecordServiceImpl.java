@@ -18,4 +18,7 @@ public class VolunteerSkillRecordServiceImpl
             VolunteerSkillRecord vs) {
         return vsr.save(vs);
     }
+    public volunteerSkillRecord getSkillById(Long id){
+        return vsr.fingById(id) 
+    }
 }
