@@ -18,5 +18,6 @@ public class TaskRecordController {
     }
      @GetMapping("/{id}")
     public  TaskRecord getById(@PathVariable Long id){
-        return taskRecord.getTaskRecordById(id);
+        return taskRecordService.getTaskRecordById(id);
+}
 }
