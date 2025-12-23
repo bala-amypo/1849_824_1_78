@@ -5,6 +5,9 @@ import com.example.demo.model.VolunteerProfile;
 import com.example.demo.service.VolunteerProfileService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @RestController
 public class VolunteerProfileController{
@@ -15,6 +18,8 @@ public class VolunteerProfileController{
         return v.createVolunteerProfile(vp);
     }
     @GetMappping("/{id}")
-    public VolunteerProfile getById(@Path)
+    public VolunteerProfile getById(@PathVariable Long id){
+        return v.getVolunteerById(id);
+    }
 
 }
