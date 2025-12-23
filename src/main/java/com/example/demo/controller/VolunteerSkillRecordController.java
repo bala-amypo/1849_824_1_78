@@ -17,7 +17,9 @@ public class VolunteerSkillRecordController{
         return vo.createVolunteerSkillRecord(vs);
     }
     @GetMapping("/{id}")
-    public VolunteerSkillRecord volunteerId(@PathVariable Long id){
-        return vo.getSkillById(id);
+    @Override
+public VolunteerSkillRecord getSkillById(Long id) {
+    return vsr.findById(id).get();
 }
+
 }
