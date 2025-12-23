@@ -19,5 +19,8 @@ public VolunteerProfile createVolunteerProfile( VolunteerProfile vp){
 public VolunteerProfile getVolunteerById(Long id){
     return vps.findById(id).orElse(null);
 }
+public VolunteerProfile updateAvailability(Long id,String availabilityStatus){
+    return vps.
+}
 
 }
