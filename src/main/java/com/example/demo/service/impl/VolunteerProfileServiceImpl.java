@@ -16,5 +16,8 @@ public VolunteerProfile createVolunteerProfile( VolunteerProfile vp){
     return vps.save(vp);
 }
 
+public VolunteerProfile getVolunteerById(Long id){
+    return vps.getVolunteerById(id);
+}
 
 }
