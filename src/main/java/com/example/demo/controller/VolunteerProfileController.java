@@ -15,6 +15,6 @@ public class VolunteerProfileController{
         return v.createVolunteerProfile(vp);
     }
     @GetMappping("/{id}")
-    public
+    public VolunteerProfile getById(@Path)
 
 }
