@@ -17,14 +17,12 @@ public class AssignmentEvaluationRecordController {
     @Autowired
     private AssignmentEvaluationRecordService a;
 
-    // POST: Create a new AssignmentEvaluationRecord
     @PostMapping
     public AssignmentEvaluationRecord addAssignmentEvaluationRecord(
             @RequestBody AssignmentEvaluationRecord as) {
         return a.createAssignmentEvaluationRecord(as);
     }
 
-    // GET: Fetch AssignmentEvaluationRecord by ID
     @GetMapping("/{id}")
     public AssignmentEvaluationRecord getAssignmentEvaluationRecord(
             @PathVariable Long id) {
