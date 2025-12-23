@@ -20,11 +20,9 @@ public class VolunteerProfile {
     private String availabilityStatus;
     private LocalDateTime createdAt;
 
-    // ✅ No-args constructor (required by JPA)
     public VolunteerProfile() {
     }
 
-    // ✅ All-args constructor
     public VolunteerProfile(Long id, String volunteer, String fullName,
                             String email, String phone,
                             String availabilityStatus,
@@ -38,7 +36,6 @@ public class VolunteerProfile {
         this.createdAt = createdAt;
     }
 
-    // Getters & Setters
     public Long getId() {
         return id;
     }
