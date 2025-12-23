@@ -19,6 +19,6 @@ public class VolunteerSkillRecordServiceImpl
         return vsr.save(vs);
     }
     public VolunteerSkillRecord getSkillById(Long id){
-        return vsr.findById(id);
+        return vsr.findById(id).get();
     }
 }
