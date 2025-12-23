@@ -5,6 +5,8 @@ import com.example.demo.model.VolunteerSkillRecord;
 import com.example.demo.service.VolunteerSkillRecordService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 public class VolunteerSkillRecordController{
@@ -15,7 +17,7 @@ public class VolunteerSkillRecordController{
         return vo.createVolunteerSkillRecord(vs);
     }
     @GetMapping("/{id}")
-    public VolunteerSkillById volunteerId(@PathVariable Long id){
+    public VolunteerSkillRecord volunteerId(@PathVariable Long id){
         return vo.getSkillById(id);
 }
 }
