@@ -1,9 +1,71 @@
+// package com.example.demo.model;
+
+// import jakarta.persistence.*;
+
+// @Entity
+// @Table(name = "assignment_evaluation_records")
+// public class AssignmentEvaluationRecord {
+
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;
+
+//     private Long assignmentId;
+
+//     private Integer rating;
+
+//     private String comments;
+
+//     // ✅ No-arg constructor
+//     public AssignmentEvaluationRecord() {
+//     }
+
+//     // ✅ Parameterized constructor
+//     public AssignmentEvaluationRecord(Long assignmentId, Integer rating, String comments) {
+//         this.assignmentId = assignmentId;
+//         this.rating = rating;
+//         this.comments = comments;
+//     }
+
+//     // Getters & Setters
+//     public Long getId() {
+//         return id;
+//     }
+
+//     public Long getAssignmentId() {
+//         return assignmentId;
+//     }
+
+//     public Integer getRating() {
+//         return rating;
+//     }
+
+//     public String getComments() {
+//         return comments;
+//     }
+
+//     public void setId(Long id) {
+//         this.id = id;
+//     }
+
+//     public void setAssignmentId(Long assignmentId) {
+//         this.assignmentId = assignmentId;
+//     }
+
+//     public void setRating(Integer rating) {
+//         this.rating = rating;
+//     }
+
+//     public void setComments(String comments) {
+//         this.comments = comments;
+//     }
+// }
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "assignment_evaluation_records")
 public class AssignmentEvaluationRecord {
 
     @Id
@@ -11,52 +73,19 @@ public class AssignmentEvaluationRecord {
     private Long id;
 
     private Long assignmentId;
-
     private Integer rating;
+    private String feedback;
+    private LocalDateTime evaluatedAt = LocalDateTime.now();
 
-    private String comments;
+    // getters & setters
+    public Long getAssignmentId() { return assignmentId; }
+    public void setAssignmentId(Long assignmentId) { this.assignmentId = assignmentId; }
 
-    // ✅ No-arg constructor
-    public AssignmentEvaluationRecord() {
-    }
+    public Integer getRating() { return rating; }
+    public void setRating(Integer rating) { this.rating = rating; }
 
-    // ✅ Parameterized constructor
-    public AssignmentEvaluationRecord(Long assignmentId, Integer rating, String comments) {
-        this.assignmentId = assignmentId;
-        this.rating = rating;
-        this.comments = comments;
-    }
+    public String getFeedback() { return feedback; }
+    public void setFeedback(String feedback) { this.feedback = feedback; }
 
-    // Getters & Setters
-    public Long getId() {
-        return id;
-    }
-
-    public Long getAssignmentId() {
-        return assignmentId;
-    }
-
-    public Integer getRating() {
-        return rating;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setAssignmentId(Long assignmentId) {
-        this.assignmentId = assignmentId;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
+    public LocalDateTime getEvaluatedAt() { return evaluatedAt; }
 }
