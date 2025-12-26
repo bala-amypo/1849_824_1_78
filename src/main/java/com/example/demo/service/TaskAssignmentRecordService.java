@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TaskAssignmentRecordService {
+public interface TaskAssignmentRecordService {
 
     public TaskAssignmentRecord createTaskAssignmentRecord(TaskAssignmentRecord ts) {
         // TODO: Save to repository
