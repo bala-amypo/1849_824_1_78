@@ -48,4 +48,9 @@ public class TaskRecordServiceImpl implements TaskRecordService {
     public List<TaskRecord> getAllTasks() {
         return repository.findAll();
     }
+    @Override
+public TaskRecord getTaskById(Long id) {
+    return repository.findById(id).orElseThrow();
+}
+
 }

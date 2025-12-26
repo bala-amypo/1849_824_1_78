@@ -10,6 +10,8 @@ public interface TaskRecordService {
 
     TaskRecord updateTask(Long id, TaskRecord task);
 
+    TaskRecord getTaskById(Long id); // REQUIRED
+
     Optional<TaskRecord> getTaskByCode(String taskCode);
 
     List<TaskRecord> getOpenTasks();
