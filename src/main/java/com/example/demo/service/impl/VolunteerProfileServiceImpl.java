@@ -1,28 +1,30 @@
-package com.example.demo.service.impl;
-import com.example.demo.repository. VolunteerProfileRepository;
-import com.example.demo.model.VolunteerProfile;
-import com.example.demo.service.VolunteerProfileService;
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.example.demo.service;
 
+import com.example.demo.model.VolunteerProfile;
+import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
-public class  VolunteerProfileServiceImpl implements  VolunteerProfileService{
+public class VolunteerProfileServiceImpl
+        implements VolunteerProfileService {
 
-@Autowired
- VolunteerProfileRepository vps;
-public VolunteerProfile createVolunteerProfile( VolunteerProfile vp){
-
-    return vps.save(vp);
-}
-
-public VolunteerProfile getVolunteerById(Long id){
-    return vps.findById(id).orElse(null);
-}
-public VolunteerProfile updateAvailability(Long id, String availabilityStatus) {
-        VolunteerProfile volunteer = getVolunteerById(id);
-        volunteer.setAvailabilityStatus(availabilityStatus);
-        return vps.save(volunteer);
+    @Override
+    public VolunteerProfile createVolunteerProfile(VolunteerProfile volunteerProfile) {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
+    @Override
+    public VolunteerProfile getVolunteerById(Long id) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public VolunteerProfile updateAvailability(Long id, String availabilityStatus) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public List<VolunteerProfile> getAllVolunteers() {  
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
