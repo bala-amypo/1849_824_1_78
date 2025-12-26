@@ -1,19 +1,34 @@
-package com.example.demo.service.impl;
+package com.example.demo.service;
 
-import com.example.demo.repository.TaskRecordRepository;
 import com.example.demo.model.TaskRecord;
-import com.example.demo.service.TaskRecordService;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
 @Service
 public class TaskRecordServiceImpl implements TaskRecordService {
 
-    @Autowired
-    private TaskRecordRepository trr;
+    @Override
+    public TaskRecord createTask(TaskRecord task) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 
     @Override
-    public TaskRecord createTaskRecord(TaskRecord tr) {
-        return trr.save(tr);
+    public TaskRecord updateTask(Long id, TaskRecord updated) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public List<TaskRecord> getOpenTasks() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public TaskRecord getTaskByCode(String code) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public List<TaskRecord> getAllTasks() {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }
