@@ -11,4 +11,6 @@ public interface TaskAssignmentService {
     List<TaskAssignmentRecord> getAssignmentsByTask(Long taskId);
 
     List<TaskAssignmentRecord> getAssignmentsByVolunteer(Long volunteerId);
+
+    List<TaskAssignmentRecord> getAllAssignments();
 }
