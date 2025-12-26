@@ -7,16 +7,15 @@ import jakarta.servlet.annotation.WebServlet;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/hello-servlet")
+@WebServlet("/hello-servlet")
 public class HelloServlet extends HttpServlet {
 
     @Override
-    protected void doGet(
-            HttpServletRequest request,
-            HttpServletResponse response)
+    protected void doGet(HttpServletRequest req,
+                         HttpServletResponse resp)
             throws IOException {
 
-        response.getWriter()
-                .write("Hello from HelloServlet");
+        resp.setContentType("text/plain");
+        resp.getWriter().write("Hello from servlet");
     }
 }

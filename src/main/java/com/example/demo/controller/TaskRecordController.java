@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/tasks")
-public class TaskController {
+public class TaskRecordController {
 
     private final TaskRecordService taskService;
     private final TaskAssignmentService assignmentService;
 
     public TaskRecordController(TaskRecordService taskService,
-                          TaskAssignmentService assignmentService) {
+                                TaskAssignmentService assignmentService) {
         this.taskService = taskService;
         this.assignmentService = assignmentService;
     }
