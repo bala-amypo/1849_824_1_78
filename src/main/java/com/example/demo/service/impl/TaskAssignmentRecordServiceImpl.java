@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Service
-public class TaskAssignmentRecordServiceImpl implements TaskAssignmentRecordService{
+public interface TaskAssignmentRecordServiceImpl implements TaskAssignmentRecordService{
 
 @Autowired
 TaskAssignmentRecordRepository tar;
