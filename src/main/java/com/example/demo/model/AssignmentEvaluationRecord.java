@@ -1,55 +1,62 @@
 package com.example.demo.model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import java.time.LocalDateTime;
+
+import jakarta.persistence.*;
+
 @Entity
-public class AssignmentEvaluationRecord{
+@Table(name = "assignment_evaluation_records")
+public class AssignmentEvaluationRecord {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long assignmentId;
+
     private Integer rating;
-    private String feedback;
-    private LocalDateTime evaluatedAt;
-      
-    public Long getId(){
+
+    private String comments;
+
+    // ✅ No-arg constructor
+    public AssignmentEvaluationRecord() {
+    }
+
+    // ✅ Parameterized constructor
+    public AssignmentEvaluationRecord(Long assignmentId, Integer rating, String comments) {
+        this.assignmentId = assignmentId;
+        this.rating = rating;
+        this.comments = comments;
+    }
+
+    // Getters & Setters
+    public Long getId() {
         return id;
     }
-    public void setId(Long id){
-        this.id=id;
-    }
-    public Long getAssignmentId(){
+
+    public Long getAssignmentId() {
         return assignmentId;
     }
-    public void setAssignmentId(Long assignmentId){
-        this.assignmentId=assignmentId;
-    }
-    public Integer getRating(){
+
+    public Integer getRating() {
         return rating;
     }
-    public void setRating(Integer rating){
-        this.rating=rating;
+
+    public String getComments() {
+        return comments;
     }
 
-    public String getFeedback(){
-         return feedback;
+    public void setId(Long id) {
+        this.id = id;
     }
-    public void setFeedback(String feedback){
-        this.feedback=feedback;
-    }
-    public LocalDateTime getEvaluatedAt(){
-         return evaluatedAt;
-    }
-    public void setEvaluatedAt(LocalDateTime evaluatedAt){
-        this.evaluatedAt=evaluatedAt;
-    }
-    public AssignmentEvaluationRecord(Long id,Long assignmentId,Integer rating,String feedback,LocalDateTime evaluatedAt){
-    this.id=id;
-    this.assignmentId=assignmentId;
-    this.rating=rating;
-    this.feedback=feedback;
-    this.evaluatedAt=evaluatedAt;
-}
-public AssignmentEvaluationRecord(){
 
-}
+    public void setAssignmentId(Long assignmentId) {
+        this.assignmentId = assignmentId;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
 }

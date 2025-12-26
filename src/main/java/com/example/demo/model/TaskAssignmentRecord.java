@@ -1,64 +1,62 @@
 package com.example.demo.model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import java.time.LocalDateTime;
+
+import jakarta.persistence.*;
+
 @Entity
-public class TaskAssignmentRecord{
+@Table(name = "task_assignment_records")
+public class TaskAssignmentRecord {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long taskId;
+
     private Long volunteerId;
-    private LocalDateTime assignedAt;
+
     private String status;
-    private LocalDateTime createdAt;
-      
-    public Long getId(){
+
+    // ✅ No-arg constructor
+    public TaskAssignmentRecord() {
+    }
+
+    // ✅ Parameterized constructor
+    public TaskAssignmentRecord(Long taskId, Long volunteerId, String status) {
+        this.taskId = taskId;
+        this.volunteerId = volunteerId;
+        this.status = status;
+    }
+
+    // Getters & Setters
+    public Long getId() {
         return id;
     }
-    public void setId(Long id){
-        this.id=id;
-    }
-    public Long getTaskId(){
+
+    public Long getTaskId() {
         return taskId;
     }
-    public void setTaskId(Long taskId){
-        this.taskId=taskId;
-    }
-    public Long getVolunteerId(){
+
+    public Long getVolunteerId() {
         return volunteerId;
     }
-    public void setVolunteerId(Long volunteerId){
-        this.volunteerId=volunteerId;
+
+    public String getStatus() {
+        return status;
     }
 
-    public LocalDateTime getAssignedAt(){
-         return assignedAt;
-    }
-    public void setAssignedAt(LocalDateTime assignedAt){
-        this.assignedAt=assignedAt;
-    }
-    public String getStatus(){
-         return status;
-    }
-    public void setStatus(String status){
-        this.status=status;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public LocalDateTime getCreatedAt(){
-         return createdAt;
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
     }
-    public void setCreatedAt(LocalDateTime createdAt){
-        this.createdAt=createdAt;
-    }
-    public TaskAssignmentRecord(Long id,Long taskId,Long volunteerId,LocalDateTime assignedAt,String status,LocalDateTime createdAt){
-    this.id=id;
-    this.taskId=taskId;
-    this.volunteerId=volunteerId;
-    this.assignedAt=assignedAt;
-    this.status=status;
-    this.createdAt=createdAt;
-}
-public TaskAssignmentRecord(){
 
-}
+    public void setVolunteerId(Long volunteerId) {
+        this.volunteerId = volunteerId;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
