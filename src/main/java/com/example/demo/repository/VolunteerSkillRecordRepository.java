@@ -5,9 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface VolunteerSkillRecordRepository
-        extends JpaRepository<VolunteerSkillRecord, Long> {
+public interface VolunteerSkillRecordRepository extends JpaRepository<VolunteerSkillRecord, Long> {
 
-    // ✅ MUST be EXACT (tests assert this)
     List<VolunteerSkillRecord> findByVolunteerId(Long volunteerId);
+
+    List<VolunteerSkillRecord> findBySkillName(String skillName);
+
+    List<VolunteerSkillRecord> findBySkillNameAndSkillLevel(String skillName, String skillLevel);
 }

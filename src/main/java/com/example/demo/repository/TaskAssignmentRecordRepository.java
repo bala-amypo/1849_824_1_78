@@ -5,13 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface TaskAssignmentRecordRepository
-        extends JpaRepository<TaskAssignmentRecord, Long> {
+public interface TaskAssignmentRecordRepository extends JpaRepository<TaskAssignmentRecord, Long> {
 
-    // ✅ CRITICAL business rule
     boolean existsByTaskIdAndStatus(Long taskId, String status);
 
-    // ✅ Required for controllers & tests
     List<TaskAssignmentRecord> findByTaskId(Long taskId);
 
     List<TaskAssignmentRecord> findByVolunteerId(Long volunteerId);
