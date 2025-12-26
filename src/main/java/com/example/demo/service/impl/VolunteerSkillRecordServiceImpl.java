@@ -5,21 +5,22 @@ import com.example.demo.repository.VolunteerSkillRecordRepository;
 import com.example.demo.service.VolunteerSkillRecordService;
 
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 
 @Service
 public class VolunteerSkillRecordServiceImpl
         implements VolunteerSkillRecordService {
 
-    @Autowired
-    private VolunteerSkillRecordRepository repo;
+    private final VolunteerSkillRecordRepository repo;
+
+    public VolunteerSkillRecordServiceImpl(
+            VolunteerSkillRecordRepository repo) {
+        this.repo = repo;
+    }
 
     @Override
-    public VolunteerSkillRecord addOrUpdateSkill(
-            VolunteerSkillRecord skill) {
-        return repo.save(skill);
+    public VolunteerSkillRecord addSkill(VolunteerSkillRecord record) {
+        return repo.save(record);
     }
 
     @Override
