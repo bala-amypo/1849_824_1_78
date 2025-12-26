@@ -2,10 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.AssignmentEvaluationRecord;
 
-public interface AssignmentEvaluationRecordService {
+public interface AssignmentEvaluationService {
 
-  
-    AssignmentEvaluationRecord createAssignmentEvaluationRecord(AssignmentEvaluationRecord as);
- 
-    AssignmentEvaluationRecord getAssignmentEvaluationById(Long id);
+    AssignmentEvaluationRecord evaluateAssignment(AssignmentEvaluationRecord evaluation);
 }

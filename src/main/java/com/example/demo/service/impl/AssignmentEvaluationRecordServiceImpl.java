@@ -1,28 +1,43 @@
- package com.example.demo.service.impl;
+package com.example.demo.service.impl;
 
+import com.example.demo.exception.BadRequestException;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.AssignmentEvaluationRecord;
+import com.example.demo.model.TaskAssignmentRecord;
 import com.example.demo.repository.AssignmentEvaluationRecordRepository;
-import com.example.demo.service.AssignmentEvaluationRecordService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.repository.TaskAssignmentRecordRepository;
+import com.example.demo.service.AssignmentEvaluationService;
+
 import org.springframework.stereotype.Service;
 
 @Service
-public class AssignmentEvaluationRecordServiceImpl
-        implements AssignmentEvaluationRecordService {
+public class AssignmentEvaluationServiceImpl
+        implements AssignmentEvaluationService {
 
-    @Autowired
-    private AssignmentEvaluationRecordRepository aer;
- 
-    @Override
-    public AssignmentEvaluationRecord createAssignmentEvaluationRecord(
-            AssignmentEvaluationRecord ae) {
-        return aer.save(ae);
+    private final AssignmentEvaluationRecordRepository evaluationRepo;
+    private final TaskAssignmentRecordRepository assignmentRepo;
+
+    public AssignmentEvaluationServiceImpl(
+            AssignmentEvaluationRecordRepository evaluationRepo,
+            TaskAssignmentRecordRepository assignmentRepo) {
+
+        this.evaluationRepo = evaluationRepo;
+        this.assignmentRepo = assignmentRepo;
     }
- 
+
     @Override
-    public AssignmentEvaluationRecord getAssignmentEvaluationById(Long id) {
-        return aer.findById(id)
-                  .orElseThrow(() ->
-                      new RuntimeException("AssignmentEvaluationRecord not found with id: " + id));
+    public AssignmentEvaluationRecord evaluateAssignment(
+            AssignmentEvaluationRecord evaluation) {
+
+        TaskAssignmentRecord assignment =
+                assignmentRepo.findById(evaluation.getAssignmentId())
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException("Assignment not found"));
+
+        if (!"COMPLETED".equalsIgnoreCase(assignment.getStatus())) {
+            throw new BadRequestException("Assignment not completed");
+        }
+
+        return evaluationRepo.save(evaluation);
     }
 }
