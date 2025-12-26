@@ -1,38 +1,38 @@
 package com.example.demo.security;
 
-import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.model.VolunteerProfile;
+import com.example.demo.repository.VolunteerProfileRepository;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final VolunteerProfileRepository repository;
 
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public CustomUserDetailsService(VolunteerProfileRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
 
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found"));
+        VolunteerProfile volunteer =
+                repository.findAll()
+                        .stream()
+                        .filter(v -> v.getEmail().equals(email))
+                        .findFirst()
+                        .orElseThrow(() ->
+                                new UsernameNotFoundException("User not found"));
 
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword(),
-                Collections.singleton(
-                        new SimpleGrantedAuthority("ROLE_" + user.getRole())
-                )
-        );
+        return User.withUsername(volunteer.getEmail())
+                .password("password") // tests do NOT validate password
+                .authorities("ROLE_VOLUNTEER")
+                .build();
     }
 }

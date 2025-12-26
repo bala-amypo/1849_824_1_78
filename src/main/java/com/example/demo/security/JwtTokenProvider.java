@@ -1,23 +1,53 @@
 package com.example.demo.security;
 
-import org.springframework.stereotype.Component;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 
-@Component
+import java.security.Key;
+import java.util.Date;
+
 public class JwtTokenProvider {
 
-    public String generateToken(String email) {
-        // simple dummy token (enough for tests)
-        return "TOKEN_" + email;
+    private final Key key;
+    private final long expirationMillis;
+
+    // ✅ REQUIRED constructor (tests use this)
+    public JwtTokenProvider(String secret, Long expirationMillis) {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.expirationMillis = expirationMillis;
     }
 
-    public String getEmailFromToken(String token) {
-        if (token.startsWith("TOKEN_")) {
-            return token.substring(6);
-        }
-        return null;
+    public String generateToken(String username, String role) {
+        Date now = new Date();
+        Date expiry = new Date(now.getTime() + expirationMillis);
+
+        return Jwts.builder()
+                .setSubject(username)
+                .claim("role", role)
+                .setIssuedAt(now)
+                .setExpiration(expiry)
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
     }
 
     public boolean validateToken(String token) {
-        return token != null && token.startsWith("TOKEN_");
+        try {
+            Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token);
+            return true;
+        } catch (JwtException | IllegalArgumentException ex) {
+            return false;
+        }
+    }
+
+    public String getUsernameFromToken(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.getSubject();
     }
 }
