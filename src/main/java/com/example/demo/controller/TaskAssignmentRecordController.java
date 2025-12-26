@@ -13,18 +13,17 @@ public class TaskAssignmentRecordController {
 
     private final TaskAssignmentService service;
 
-    public TaskAssignmentController(TaskAssignmentService service) {
+    public TaskAssignmentRecordController(TaskAssignmentService service) {
         this.service = service;
     }
 
     @GetMapping("/task/{taskId}")
-    public List<TaskAssignmentRecord> getAssignmentsByTask(
-            @PathVariable Long taskId) {
+    public List<TaskAssignmentRecord> getByTask(@PathVariable Long taskId) {
         return service.getAssignmentsByTask(taskId);
     }
 
     @GetMapping("/volunteer/{volunteerId}")
-    public List<TaskAssignmentRecord> getAssignmentsByVolunteer(
+    public List<TaskAssignmentRecord> getByVolunteer(
             @PathVariable Long volunteerId) {
         return service.getAssignmentsByVolunteer(volunteerId);
     }
