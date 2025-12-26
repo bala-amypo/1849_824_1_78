@@ -5,35 +5,35 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TaskAssignmentRecordServiceImpl implements TaskAssignmentRecordService {
+public class TaskAssignmentRecordService {
 
-    @Override
     public TaskAssignmentRecord createTaskAssignmentRecord(TaskAssignmentRecord ts) {
+        // TODO: Save to repository
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    @Override
     public TaskAssignmentRecord assignTask(Long taskId) {
+        // TODO: Implement task assignment logic
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    @Override
     public TaskAssignmentRecord updateAssignmentStatus(Long id, String status) {
+        // TODO: Implement status update logic
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    @Override
     public List<TaskAssignmentRecord> getAssignmentsByVolunteer(Long volunteerId) {
+        // TODO: Implement retrieval logic
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    @Override
     public List<TaskAssignmentRecord> getAssignmentsByTask(Long taskId) {
+        // TODO: Implement retrieval logic
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    @Override
     public List<TaskAssignmentRecord> getAllAssignments() {
+        // TODO: Implement retrieval logic
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }
