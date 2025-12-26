@@ -1,17 +1,26 @@
 package com.example.demo.security;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class JwtTokenProvider {
 
-    private final String secret;
-    private final long expirationMs;
+    private String secret;
+    private long expirationMs;
 
+    // ✅ REQUIRED by Spring Boot at runtime
+    public JwtTokenProvider() {
+        this.secret = "VerySecretKeyForJwtDemoApplication123456";
+        this.expirationMs = 3600000L;
+    }
+
+    // ✅ USED BY TEST CASES
     public JwtTokenProvider(String secret, long expirationMs) {
         this.secret = secret;
         this.expirationMs = expirationMs;
@@ -43,8 +52,7 @@ public class JwtTokenProvider {
     }
 
     public String getUsernameFromToken(String token) {
-        Map<String, Object> claims = getAllClaims(token);
-        return claims.get("email").toString();
+        return getAllClaims(token).get("email").toString();
     }
 
     public Map<String, Object> getAllClaims(String token) {
