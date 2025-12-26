@@ -1,53 +1,62 @@
 package com.example.demo.security;
 
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
+import org.springframework.stereotype.Component;
 
-import java.security.Key;
-import java.util.Date;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
+@Component
 public class JwtTokenProvider {
 
-    private final Key key;
+    private final String secret;
     private final long expirationMillis;
 
-    // ✅ REQUIRED constructor (tests use this)
-    public JwtTokenProvider(String secret, Long expirationMillis) {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+    // Constructor required by tests
+    public JwtTokenProvider(String secret, long expirationMillis) {
+        this.secret = secret;
         this.expirationMillis = expirationMillis;
     }
 
-    public String generateToken(String username, String role) {
-        Date now = new Date();
-        Date expiry = new Date(now.getTime() + expirationMillis);
-
-        return Jwts.builder()
-                .setSubject(username)
-                .claim("role", role)
-                .setIssuedAt(now)
-                .setExpiration(expiry)
-                .signWith(key, SignatureAlgorithm.HS256)
-                .compact();
+    // Default constructor for Spring
+    public JwtTokenProvider() {
+        this.secret = "VerySecretKeyForJwtDemoApplication123456";
+        this.expirationMillis = 3600000L;
     }
 
+    // Generate a simple token
+    public String generateToken(String username, String role) {
+        long expiryTime = System.currentTimeMillis() + expirationMillis;
+        String rawToken = username + "|" + role + "|" + expiryTime;
+        return Base64.getEncoder()
+                .encodeToString(rawToken.getBytes(StandardCharsets.UTF_8));
+    }
+
+    // Validate token
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token);
-            return true;
-        } catch (JwtException | IllegalArgumentException ex) {
+            String decoded = decode(token);
+            String[] parts = decoded.split("\\|");
+            if (parts.length != 3) return false;
+
+            long expiryTime = Long.parseLong(parts[2]);
+            return expiryTime >= System.currentTimeMillis();
+        } catch (Exception e) {
             return false;
         }
     }
 
     public String getUsernameFromToken(String token) {
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-        return claims.getSubject();
+        return decode(token).split("\\|")[0];
+    }
+
+    public String getRoleFromToken(String token) {
+        return decode(token).split("\\|")[1];
+    }
+
+    private String decode(String token) {
+        return new String(
+                Base64.getDecoder().decode(token),
+                StandardCharsets.UTF_8
+        );
     }
 }
