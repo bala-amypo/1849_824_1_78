@@ -1,79 +1,56 @@
- package com.example.demo.model;
+package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "volunteer_profiles")
 public class VolunteerProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String volunteer;
-    private String fullName;
-    private String email;
-    private String phone;
-    private String availabilityStatus;
-    private LocalDateTime createdAt;
+    private String name;
 
+    @Column(unique = true)
+    private String email;
+
+    private String availabilityStatus;
+
+    // ✅ No-arg constructor (REQUIRED)
     public VolunteerProfile() {
     }
 
-    public VolunteerProfile(Long id, String volunteer, String fullName,
-                            String email, String phone,
-                            String availabilityStatus,
-                            LocalDateTime createdAt) {
-        this.id = id;
-        this.volunteer = volunteer;
-        this.fullName = fullName;
+    // ✅ Parameterized constructor (REQUIRED BY TESTS)
+    public VolunteerProfile(String name, String email, String availabilityStatus) {
+        this.name = name;
         this.email = email;
-        this.phone = phone;
         this.availabilityStatus = availabilityStatus;
-        this.createdAt = createdAt;
     }
 
+    // Getters & Setters
     public Long getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getVolunteer() {
-        return volunteer;
-    }
-
-    public void setVolunteer(String volunteer) {
-        this.volunteer = volunteer;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public String getEmail() {
         return email;
     }
-
+    
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getAvailabilityStatus() {
@@ -82,13 +59,5 @@ public class VolunteerProfile {
 
     public void setAvailabilityStatus(String availabilityStatus) {
         this.availabilityStatus = availabilityStatus;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }

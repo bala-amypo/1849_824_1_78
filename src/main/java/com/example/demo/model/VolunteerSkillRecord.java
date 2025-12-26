@@ -1,12 +1,9 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "volunteer_skill_records")
 public class VolunteerSkillRecord {
 
     @Id
@@ -14,31 +11,28 @@ public class VolunteerSkillRecord {
     private Long id;
 
     private Long volunteerId;
-    private String skillName;
-    private String skillLevel;
-    private Boolean certified;
-    private LocalDateTime updatedAt;
 
+    private String skillName;
+
+    private String skillLevel;
+
+    private boolean certified;
+
+    // ✅ No-arg constructor
     public VolunteerSkillRecord() {
     }
 
-    public VolunteerSkillRecord(Long id, Long volunteerId,
-                                String skillName, String skillLevel,
-                                Boolean certified, LocalDateTime updatedAt) {
-        this.id = id;
+    // ✅ Parameterized constructor
+    public VolunteerSkillRecord(Long volunteerId, String skillName, String skillLevel, boolean certified) {
         this.volunteerId = volunteerId;
         this.skillName = skillName;
         this.skillLevel = skillLevel;
         this.certified = certified;
-        this.updatedAt = updatedAt;
     }
 
+    // Getters & Setters
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getVolunteerId() {
@@ -47,6 +41,10 @@ public class VolunteerSkillRecord {
 
     public void setVolunteerId(Long volunteerId) {
         this.volunteerId = volunteerId;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getSkillName() {
@@ -65,19 +63,11 @@ public class VolunteerSkillRecord {
         this.skillLevel = skillLevel;
     }
 
-    public Boolean getCertified() {
+    public boolean isCertified() {
         return certified;
     }
 
-    public void setCertified(Boolean certified) {
+    public void setCertified(boolean certified) {
         this.certified = certified;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }
