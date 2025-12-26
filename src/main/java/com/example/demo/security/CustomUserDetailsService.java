@@ -1,38 +1,47 @@
 package com.example.demo.security;
 
-import com.example.demo.model.VolunteerProfile;
-import com.example.demo.repository.VolunteerProfileRepository;
-
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Service;
 
-@Service
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
+
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final VolunteerProfileRepository repository;
+    private static final Map<String, Map<String, Object>> USERS = new HashMap<>();
+    private static final AtomicLong ID_GEN = new AtomicLong(1);
 
-    public CustomUserDetailsService(VolunteerProfileRepository repository) {
-        this.repository = repository;
+    public Map<String, Object> registerUser(
+            String fullName,
+            String email,
+            String password,
+            String role
+    ) {
+        Map<String, Object> user = new HashMap<>();
+        user.put("userId", ID_GEN.getAndIncrement());
+        user.put("fullName", fullName);
+        user.put("email", email);
+        user.put("password", password);
+        user.put("role", role);
+
+        USERS.put(email, user);
+        return user;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
 
-        VolunteerProfile volunteer =
-                repository.findAll()
-                        .stream()
-                        .filter(v -> v.getEmail().equals(email))
-                        .findFirst()
-                        .orElseThrow(() ->
-                                new UsernameNotFoundException("User not found"));
+        Map<String, Object> user = USERS.get(email);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
 
-        return User.withUsername(volunteer.getEmail())
-                .password("password") // tests do NOT validate password
-                .authorities("ROLE_VOLUNTEER")
+        return User.withUsername(email)
+                .password((String) user.get("password"))
+                .authorities((String) user.get("role"))
                 .build();
     }
 }

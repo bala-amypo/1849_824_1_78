@@ -1,62 +1,68 @@
 package com.example.demo.security;
 
-import org.springframework.stereotype.Component;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.Authentication;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+import java.security.Key;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-@Component
 public class JwtTokenProvider {
 
-    private final String secret;
-    private final long expirationMillis;
+    private final Key key;
+    private final long expirationMs;
 
-    // Constructor required by tests
-    public JwtTokenProvider(String secret, long expirationMillis) {
-        this.secret = secret;
-        this.expirationMillis = expirationMillis;
+    public JwtTokenProvider(String secret, long expirationMs) {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.expirationMs = expirationMs;
     }
 
-    // Default constructor for Spring
-    public JwtTokenProvider() {
-        this.secret = "VerySecretKeyForJwtDemoApplication123456";
-        this.expirationMillis = 3600000L;
+    public String generateToken(
+            Authentication authentication,
+            Long userId,
+            String role
+    ) {
+        String email = authentication.getName();
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", userId);
+        claims.put("role", role);
+        claims.put("email", email);
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(email)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
     }
 
-    // Generate a simple token
-    public String generateToken(String username, String role) {
-        long expiryTime = System.currentTimeMillis() + expirationMillis;
-        String rawToken = username + "|" + role + "|" + expiryTime;
-        return Base64.getEncoder()
-                .encodeToString(rawToken.getBytes(StandardCharsets.UTF_8));
-    }
-
-    // Validate token
     public boolean validateToken(String token) {
         try {
-            String decoded = decode(token);
-            String[] parts = decoded.split("\\|");
-            if (parts.length != 3) return false;
-
-            long expiryTime = Long.parseLong(parts[2]);
-            return expiryTime >= System.currentTimeMillis();
-        } catch (Exception e) {
+            Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token);
+            return true;
+        } catch (JwtException | IllegalArgumentException ex) {
             return false;
         }
     }
 
     public String getUsernameFromToken(String token) {
-        return decode(token).split("\\|")[0];
+        return getAllClaims(token).getSubject();
     }
 
-    public String getRoleFromToken(String token) {
-        return decode(token).split("\\|")[1];
-    }
+    public Map<String, Object> getAllClaims(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
 
-    private String decode(String token) {
-        return new String(
-                Base64.getDecoder().decode(token),
-                StandardCharsets.UTF_8
-        );
+        return new HashMap<>(claims);
     }
 }
