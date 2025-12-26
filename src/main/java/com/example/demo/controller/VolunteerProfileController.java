@@ -1,7 +1,57 @@
-package com.example.demo.controller;
+// package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.web.bind.annotation.RestController;
+// import org.springframework.beans.factory.annotation.Autowired;
+
+// import com.example.demo.model.VolunteerProfile;
+// import com.example.demo.service.VolunteerProfileService;
+
+// import org.springframework.web.bind.annotation.*;
+
+// import java.util.List;
+
+// @RestController
+// @RequestMapping("/api/volunteers")
+// public class VolunteerProfileController {
+
+//     @Autowired
+//     private VolunteerProfileService volunteerProfileService;
+
+//     // POST /api/volunteers - Create volunteer
+//     @PostMapping
+//     public VolunteerProfile createVolunteer(
+//             @RequestBody VolunteerProfile volunteerProfile) {
+//         return volunteerProfileService.createVolunteerProfile(volunteerProfile);
+//     }
+
+//     // GET /api/volunteers/{id} - Get volunteer
+//     @GetMapping("/{id}")
+//     public VolunteerProfile getVolunteerById(@PathVariable Long id) {
+//         return volunteerProfileService.getVolunteerById(id);
+//     }
+
+//     // GET /api/volunteers - List all
+//     @GetMapping
+//     public List<VolunteerProfile> getAllVolunteers() {
+//         return volunteerProfileService.getAllVolunteers();
+//     }
+
+//     // PUT /api/volunteers/{id}/availability - Update status
+//     @PutMapping("/{id}/availability")
+//     public VolunteerProfile updateAvailability(
+//             @PathVariable Long id,
+//             @RequestBody String availabilityStatus) {
+//         return volunteerProfileService.updateAvailability(id, availabilityStatus);
+//     }
+
+//     // GET /api/volunteers/lookup/{volunteerId} - Lookup by ID
+//     @GetMapping("/lookup/{volunteerId}")
+//     public VolunteerProfile lookupVolunteer(
+//             @PathVariable Long volunteerId) {
+//         return volunteerProfileService.getVolunteerById(volunteerId);
+//     }
+// }
+package com.example.demo.controller;
 
 import com.example.demo.model.VolunteerProfile;
 import com.example.demo.service.VolunteerProfileService;
@@ -14,40 +64,37 @@ import java.util.List;
 @RequestMapping("/api/volunteers")
 public class VolunteerProfileController {
 
-    @Autowired
-    private VolunteerProfileService volunteerProfileService;
+    private final VolunteerProfileService service;
 
-    // POST /api/volunteers - Create volunteer
+    public VolunteerProfileController(VolunteerProfileService service) {
+        this.service = service;
+    }
+
+    // POST /api/volunteers  ✅ FIXES YOUR ERROR
     @PostMapping
     public VolunteerProfile createVolunteer(
-            @RequestBody VolunteerProfile volunteerProfile) {
-        return volunteerProfileService.createVolunteerProfile(volunteerProfile);
+            @RequestBody VolunteerProfile profile) {
+        return service.createVolunteer(profile);
     }
 
-    // GET /api/volunteers/{id} - Get volunteer
-    @GetMapping("/{id}")
-    public VolunteerProfile getVolunteerById(@PathVariable Long id) {
-        return volunteerProfileService.getVolunteerById(id);
-    }
-
-    // GET /api/volunteers - List all
+    // GET /api/volunteers
     @GetMapping
     public List<VolunteerProfile> getAllVolunteers() {
-        return volunteerProfileService.getAllVolunteers();
+        return service.getAllVolunteers();
     }
 
-    // PUT /api/volunteers/{id}/availability - Update status
+    // GET /api/volunteers/{id}
+    @GetMapping("/{id}")
+    public VolunteerProfile getVolunteer(@PathVariable Long id) {
+        return service.getVolunteerById(id);
+    }
+
+    // PUT /api/volunteers/{id}/availability
     @PutMapping("/{id}/availability")
     public VolunteerProfile updateAvailability(
             @PathVariable Long id,
-            @RequestBody String availabilityStatus) {
-        return volunteerProfileService.updateAvailability(id, availabilityStatus);
-    }
+            @RequestParam String availabilityStatus) {
 
-    // GET /api/volunteers/lookup/{volunteerId} - Lookup by ID
-    @GetMapping("/lookup/{volunteerId}")
-    public VolunteerProfile lookupVolunteer(
-            @PathVariable Long volunteerId) {
-        return volunteerProfileService.getVolunteerById(volunteerId);
+        return service.updateAvailability(id, availabilityStatus);
     }
 }
