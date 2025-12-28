@@ -36,7 +36,9 @@
 
 import com.example.demo.model.VolunteerProfile;
 import com.example.demo.service.VolunteerProfileService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,8 +53,13 @@ public class VolunteerProfileController {
         this.service = service;
     }
 
-    // POST /volunteers
-    @PostMapping
+    // POST /volunteers/register
+    @Operation(summary = "Register a new volunteer")
+    @PostMapping(
+            value = "/register",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     @ResponseStatus(HttpStatus.CREATED)
     public VolunteerProfile createVolunteer(
             @RequestBody VolunteerProfile profile) {
@@ -60,18 +67,21 @@ public class VolunteerProfileController {
     }
 
     // GET /volunteers/{id}
+    @Operation(summary = "Get volunteer by database ID")
     @GetMapping("/{id}")
     public VolunteerProfile getVolunteerById(@PathVariable Long id) {
         return service.getVolunteerById(id);
     }
 
     // GET /volunteers
+    @Operation(summary = "Get all volunteers")
     @GetMapping
     public List<VolunteerProfile> getAllVolunteers() {
         return service.getAllVolunteers();
     }
 
     // GET /volunteers/lookup/{volunteerId}
+    @Operation(summary = "Find volunteer by volunteerId")
     @GetMapping("/lookup/{volunteerId}")
     public VolunteerProfile findByVolunteerId(
             @PathVariable String volunteerId) {
