@@ -18,10 +18,4 @@
 
 //     List<VolunteerProfile> findByAvailabilityStatus(String status);
 // }
-package com.example.volunteer.repository;
-
-import com.example.volunteer.entity.VolunteerProfile;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface VolunteerProfileRepository extends JpaRepository<VolunteerProfile, Long> {
-}
+ 
