@@ -1,94 +1,3 @@
-// package com.example.demo.model;
-
-// import jakarta.persistence.Entity;
-// import jakarta.persistence.GeneratedValue;
-// import jakarta.persistence.GenerationType;
-// import jakarta.persistence.Id;
-
-// import java.time.LocalDateTime;
-
-// @Entity
-// public class VolunteerProfile {
-
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//     private Long id;
-
-//     private String volunteerId;
-//     private String fullName;
-//     private String email;
-//     private String phone;
-//     private String availabilityStatus;
-
-//     private LocalDateTime createdAt;
-
-//     // ✅ REQUIRED by JPA
-//     public VolunteerProfile() {
-//         this.createdAt = LocalDateTime.now();
-//     }
-
-//     // ✅ REQUIRED for compilation (services/controllers use this)
-//     public VolunteerProfile(String volunteerId, String fullName, String email) {
-//         this.volunteerId = volunteerId;
-//         this.fullName = fullName;
-//         this.email = email;
-//         this.createdAt = LocalDateTime.now();
-//     }
-
-//     // ================= GETTERS & SETTERS =================
-
-//     public Long getId() {
-//         return id;
-//     }
-
-//     public void setId(Long id) {
-//         this.id = id;
-//     }
-
-//     public String getVolunteerId() {
-//         return volunteerId;
-//     }
-
-//     public void setVolunteerId(String volunteerId) {
-//         this.volunteerId = volunteerId;
-//     }
-
-//     public String getFullName() {
-//         return fullName;
-//     }
-
-//     public void setFullName(String fullName) {
-//         this.fullName = fullName;
-//     }
-
-//     public String getEmail() {
-//         return email;
-//     }
-
-//     public void setEmail(String email) {
-//         this.email = email;
-//     }
-
-//     public String getPhone() {
-//         return phone;
-//     }
-
-//     public void setPhone(String phone) {
-//         this.phone = phone;
-//     }
-
-//     public String getAvailabilityStatus() {
-//         return availabilityStatus;
-//     }
-
-//     public void setAvailabilityStatus(String availabilityStatus) {
-//         this.availabilityStatus = availabilityStatus;
-//     }
-
-//     public LocalDateTime getCreatedAt() {
-//         return createdAt;
-//     }
-// }
 package com.example.demo.model;
 
 import jakarta.persistence.Entity;
@@ -109,11 +18,8 @@ public class VolunteerProfile {
     private String fullName;
     private String email;
     private String phone;
-
-    // ✅ REQUIRED FOR JWT AUTH
-    private String password;
-
     private String availabilityStatus;
+
     private LocalDateTime createdAt;
 
     // ✅ REQUIRED by JPA
@@ -121,7 +27,7 @@ public class VolunteerProfile {
         this.createdAt = LocalDateTime.now();
     }
 
-    // Optional constructor
+    // ✅ REQUIRED for compilation (services/controllers use this)
     public VolunteerProfile(String volunteerId, String fullName, String email) {
         this.volunteerId = volunteerId;
         this.fullName = fullName;
@@ -171,15 +77,6 @@ public class VolunteerProfile {
         this.phone = phone;
     }
 
-    // ✅ PASSWORD (FIX FOR COMPILATION ERROR)
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getAvailabilityStatus() {
         return availabilityStatus;
     }
@@ -192,3 +89,4 @@ public class VolunteerProfile {
         return createdAt;
     }
 }
+ 
