@@ -1,70 +1,70 @@
-package com.example.demo.model;
+// package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
+// import jakarta.persistence.Id;
 
-import java.time.LocalDateTime;
+// import java.time.LocalDateTime;
 
-@Entity
-public class AssignmentEvaluationRecord {
+// @Entity
+// public class AssignmentEvaluationRecord {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;
 
-    private Long assignmentId;
-    private Integer rating;
-    private String feedback;
-    private LocalDateTime evaluatedAt;
+//     private Long assignmentId;
+//     private Integer rating;
+//     private String feedback;
+//     private LocalDateTime evaluatedAt;
 
-    // ✅ REQUIRED by JPA
-    public AssignmentEvaluationRecord() {
-        this.evaluatedAt = LocalDateTime.now();
-    }
+//     // ✅ REQUIRED by JPA
+//     public AssignmentEvaluationRecord() {
+//         this.evaluatedAt = LocalDateTime.now();
+//     }
 
-    // ✅ REQUIRED for controller/service compilation
-    public AssignmentEvaluationRecord(Long assignmentId,
-                                      Integer rating,
-                                      String feedback) {
-        this.assignmentId = assignmentId;
-        this.rating = rating;
-        this.feedback = feedback;
-        this.evaluatedAt = LocalDateTime.now();
-    }
+//     // ✅ REQUIRED for controller/service compilation
+//     public AssignmentEvaluationRecord(Long assignmentId,
+//                                       Integer rating,
+//                                       String feedback) {
+//         this.assignmentId = assignmentId;
+//         this.rating = rating;
+//         this.feedback = feedback;
+//         this.evaluatedAt = LocalDateTime.now();
+//     }
 
-    // ================= GETTERS & SETTERS =================
+//     // ================= GETTERS & SETTERS =================
 
-    public Long getId() {
-        return id;
-    }
+//     public Long getId() {
+//         return id;
+//     }
 
-    public Long getAssignmentId() {
-        return assignmentId;
-    }
+//     public Long getAssignmentId() {
+//         return assignmentId;
+//     }
 
-    public void setAssignmentId(Long assignmentId) {
-        this.assignmentId = assignmentId;
-    }
+//     public void setAssignmentId(Long assignmentId) {
+//         this.assignmentId = assignmentId;
+//     }
 
-    public Integer getRating() {
-        return rating;
-    }
+//     public Integer getRating() {
+//         return rating;
+//     }
 
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
+//     public void setRating(Integer rating) {
+//         this.rating = rating;
+//     }
 
-    public String getFeedback() {
-        return feedback;
-    }
+//     public String getFeedback() {
+//         return feedback;
+//     }
 
-    public void setFeedback(String feedback) {
-        this.feedback = feedback;
-    }
+//     public void setFeedback(String feedback) {
+//         this.feedback = feedback;
+//     }
 
-    public LocalDateTime getEvaluatedAt() {
-        return evaluatedAt;
-    }
-}
+//     public LocalDateTime getEvaluatedAt() {
+//         return evaluatedAt;
+//     }
+// }
