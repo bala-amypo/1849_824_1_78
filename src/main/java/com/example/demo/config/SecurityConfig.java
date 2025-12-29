@@ -61,34 +61,40 @@
 //         return new BCryptPasswordEncoder();
 //     }
 // }
-package com.example.demo.config;
+package com.example.demo.controller;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
+import com.example.demo.dto.EvaluationRequest;
+import com.example.demo.model.AssignmentEvaluationRecord;
+import com.example.demo.service.AssignmentEvaluationService;
 
-@Configuration
-public class SecurityConfig {
+import jakarta.validation.Valid;
+import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+@RestController
+@RequestMapping("/api/evaluations")
+public class AssignmentEvaluationController {
 
-        http
-            // 🔴 Disable CSRF so Swagger POST works
-            .csrf(csrf -> csrf.disable())
+    private final AssignmentEvaluationService service;
 
-            // 🔓 Allow Swagger & API access
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                        "/v3/api-docs/**",
-                        "/swagger-ui/**",
-                        "/swagger-ui.html",
-                        "/api/**"
-                ).permitAll()
-                .anyRequest().authenticated()
-            );
+    public AssignmentEvaluationController(AssignmentEvaluationService service) {
+        this.service = service;
+    }
 
-        return http.build();
+    @PostMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseStatus(HttpStatus.CREATED)
+    public AssignmentEvaluationRecord evaluate(
+            @Valid @RequestBody EvaluationRequest request) {
+        return service.evaluateAssignment(
+                new AssignmentEvaluationRecord(
+                        request.getAssignmentId(),
+                        request.getRating(),
+                        request.getComments()
+                )
+        );
     }
 }
