@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service   // ✅ THIS IS THE FIX
+@Service    
 public class TaskAssignmentServiceImpl implements TaskAssignmentService {
 
     private final TaskAssignmentRecordRepository taskAssignmentRecordRepository;
