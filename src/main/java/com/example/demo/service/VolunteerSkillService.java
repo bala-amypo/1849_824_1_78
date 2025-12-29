@@ -1,3 +1,14 @@
+// // // package com.example.demo.service;
+
+// // // import com.example.demo.model.VolunteerSkillRecord;
+// // // import java.util.List;
+
+// // // public interface VolunteerSkillService {
+
+// // //     VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord record);
+
+// // //     List<VolunteerSkillRecord> getSkillsByVolunteer(Long volunteerId);
+// // // }
 // // package com.example.demo.service;
 
 // // import com.example.demo.model.VolunteerSkillRecord;
@@ -5,7 +16,7 @@
 
 // // public interface VolunteerSkillService {
 
-// //     VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord record);
+// //     VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord skill);
 
 // //     List<VolunteerSkillRecord> getSkillsByVolunteer(Long volunteerId);
 // // }
@@ -15,19 +26,8 @@
 // import java.util.List;
 
 // public interface VolunteerSkillService {
-
-//     VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord skill);
-
+    
 //     List<VolunteerSkillRecord> getSkillsByVolunteer(Long volunteerId);
+    
+//     VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord skill);
 // }
-package com.example.demo.service;
-
-import com.example.demo.model.VolunteerSkillRecord;
-import java.util.List;
-
-public interface VolunteerSkillService {
-    
-    List<VolunteerSkillRecord> getSkillsByVolunteer(Long volunteerId);
-    
-    VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord skill);
-}

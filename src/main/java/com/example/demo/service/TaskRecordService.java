@@ -1,55 +1,55 @@
+// // // package com.example.demo.service;
+
+// // // import com.example.demo.model.TaskRecord;
+// // // import java.util.List;
+// // // import java.util.Optional;
+
+// // // public interface TaskRecordService {
+
+// // //     TaskRecord createTask(TaskRecord task);
+
+// // //     TaskRecord updateTask(Long id, TaskRecord task);
+
+// // //     TaskRecord getTaskById(Long id); // REQUIRED
+
+// // //     Optional<TaskRecord> getTaskByCode(String taskCode);
+
+// // //     List<TaskRecord> getOpenTasks();
+
+// // //     List<TaskRecord> getAllTasks();
+// // // }
 // // package com.example.demo.service;
 
 // // import com.example.demo.model.TaskRecord;
 // // import java.util.List;
-// // import java.util.Optional;
 
 // // public interface TaskRecordService {
 
 // //     TaskRecord createTask(TaskRecord task);
 
-// //     TaskRecord updateTask(Long id, TaskRecord task);
-
-// //     TaskRecord getTaskById(Long id); // REQUIRED
-
-// //     Optional<TaskRecord> getTaskByCode(String taskCode);
+// //     List<TaskRecord> getAllTasks();
 
 // //     List<TaskRecord> getOpenTasks();
 
-// //     List<TaskRecord> getAllTasks();
+// //     TaskRecord getTaskByCode(String taskCode);
 // // }
 // package com.example.demo.service;
 
 // import com.example.demo.model.TaskRecord;
 // import java.util.List;
+// import java.util.Optional;
 
 // public interface TaskRecordService {
-
+    
 //     TaskRecord createTask(TaskRecord task);
-
+    
+//     TaskRecord getTaskById(Long id);
+    
 //     List<TaskRecord> getAllTasks();
-
+    
 //     List<TaskRecord> getOpenTasks();
-
-//     TaskRecord getTaskByCode(String taskCode);
+    
+//     Optional<TaskRecord> getTaskByCode(String taskCode);
+    
+//     TaskRecord updateTask(Long id, TaskRecord updatedTask);
 // }
-package com.example.demo.service;
-
-import com.example.demo.model.TaskRecord;
-import java.util.List;
-import java.util.Optional;
-
-public interface TaskRecordService {
-    
-    TaskRecord createTask(TaskRecord task);
-    
-    TaskRecord getTaskById(Long id);
-    
-    List<TaskRecord> getAllTasks();
-    
-    List<TaskRecord> getOpenTasks();
-    
-    Optional<TaskRecord> getTaskByCode(String taskCode);
-    
-    TaskRecord updateTask(Long id, TaskRecord updatedTask);
-}
