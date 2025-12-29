@@ -60,13 +60,12 @@ public class AssignmentEvaluationController {
     public AssignmentEvaluationRecord evaluate(
             @Valid @RequestBody EvaluationRequest request) {
 
-        AssignmentEvaluationRecord record =
+        return service.evaluateAssignment(
                 new AssignmentEvaluationRecord(
                         request.getAssignmentId(),
                         request.getRating(),
                         request.getComments()
-                );
-
-        return service.evaluateAssignment(record);
+                )
+        );
     }
 }

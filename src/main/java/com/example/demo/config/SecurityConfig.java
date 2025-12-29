@@ -61,40 +61,31 @@
 //         return new BCryptPasswordEncoder();
 //     }
 // }
-package com.example.demo.controller;
+package com.example.demo.config;
 
-import com.example.demo.dto.EvaluationRequest;
-import com.example.demo.model.AssignmentEvaluationRecord;
-import com.example.demo.service.AssignmentEvaluationService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
-import jakarta.validation.Valid;
-import org.springframework.http.MediaType;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+@Configuration
+public class SecurityConfig {
 
-@RestController
-@RequestMapping("/api/evaluations")
-public class AssignmentEvaluationController {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-    private final AssignmentEvaluationService service;
+        http
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                        "/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html",
+                        "/api/**"
+                ).permitAll()
+                .anyRequest().authenticated()
+            );
 
-    public AssignmentEvaluationController(AssignmentEvaluationService service) {
-        this.service = service;
-    }
-
-    @PostMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    @ResponseStatus(HttpStatus.CREATED)
-    public AssignmentEvaluationRecord evaluate(
-            @Valid @RequestBody EvaluationRequest request) {
-        return service.evaluateAssignment(
-                new AssignmentEvaluationRecord(
-                        request.getAssignmentId(),
-                        request.getRating(),
-                        request.getComments()
-                )
-        );
+        return http.build();
     }
 }

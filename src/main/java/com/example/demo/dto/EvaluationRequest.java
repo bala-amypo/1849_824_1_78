@@ -47,8 +47,6 @@ public class EvaluationRequest {
     private int rating;
     private String comments;
 
-    // 🔴 REQUIRED: getters & setters
-
     public Long getAssignmentId() {
         return assignmentId;
     }
