@@ -29,7 +29,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.VolunteerSkillRecord;
-import com.example.demo.service.VolunteerSkillRecordService;
+import com.example.demo.service.VolunteerSkillService;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,10 +44,9 @@ import java.util.List;
 @RequestMapping("/api/volunteer-skills")
 public class VolunteerSkillRecordController {
 
-    private final VolunteerSkillRecordService service;
+    private final VolunteerSkillService service;
 
-    public VolunteerSkillRecordController(
-            VolunteerSkillRecordService service) {
+    public VolunteerSkillRecordController(VolunteerSkillService service) {
         this.service = service;
     }
 
