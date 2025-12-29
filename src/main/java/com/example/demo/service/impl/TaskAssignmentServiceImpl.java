@@ -2,8 +2,14 @@ package com.example.demo.service.impl;
 
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.*;
-import com.example.demo.repository.*;
+import com.example.demo.model.TaskAssignmentRecord;
+import com.example.demo.model.TaskRecord;
+import com.example.demo.model.VolunteerProfile;
+import com.example.demo.model.VolunteerSkillRecord;
+import com.example.demo.repository.TaskAssignmentRecordRepository;
+import com.example.demo.repository.TaskRecordRepository;
+import com.example.demo.repository.VolunteerProfileRepository;
+import com.example.demo.repository.VolunteerSkillRecordRepository;
 import com.example.demo.service.TaskAssignmentService;
 import com.example.demo.util.SkillLevelUtil;
 import org.springframework.stereotype.Service;
@@ -32,58 +38,56 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
     @Override
     public TaskAssignmentRecord assignTask(Long taskId) {
 
-        // 1. Ensure single ACTIVE assignment
-        if (taskAssignmentRecordRepository.existsByTaskIdAndStatus(taskId, "ACTIVE")) {
-            throw new BadRequestException("Task already assigned");
-        }
-
-        // 2. Load task
+        // ✅ 1. Task must exist FIRST
         TaskRecord task = taskRecordRepository.findById(taskId)
                 .orElseThrow(() -> new ResourceNotFoundException("Task not found"));
 
-        // 3. Load available volunteers
+        // ✅ 2. Only one ACTIVE assignment allowed
+        if (taskAssignmentRecordRepository.existsByTaskIdAndStatus(taskId, "ACTIVE")) {
+            throw new BadRequestException("Task already has an ACTIVE assignment");
+        }
+
+        // ✅ 3. Find AVAILABLE volunteers
         List<VolunteerProfile> volunteers =
                 volunteerProfileRepository.findByAvailabilityStatus("AVAILABLE");
 
-        boolean skillFoundButLevelLow = false;
+        boolean skillFoundButLevelInsufficient = false;
 
         for (VolunteerProfile volunteer : volunteers) {
-
-            // 4. Load volunteer skills
             List<VolunteerSkillRecord> skills =
                     volunteerSkillRecordRepository.findByVolunteerId(volunteer.getId());
 
             for (VolunteerSkillRecord skill : skills) {
 
-                // 5. Skill name matches
-                if (skill.getSkillName().equalsIgnoreCase(task.getRequiredSkill())) {
+                // ✅ Case-insensitive skill match (TEST EXPECTS THIS)
+                if (skill.getSkillName() != null
+                        && task.getRequiredSkill() != null
+                        && skill.getSkillName().equalsIgnoreCase(task.getRequiredSkill())) {
 
-                    // 6. Skill level check
-                    if (!SkillLevelUtil.hasRequiredSkillLevel(
+                    // Skill exists but level may be insufficient
+                    if (SkillLevelUtil.hasRequiredSkillLevel(
                             skill.getSkillLevel(),
                             task.getRequiredSkillLevel())) {
 
-                        skillFoundButLevelLow = true;
-                        continue;
+                        TaskAssignmentRecord assignment = new TaskAssignmentRecord();
+                        assignment.setTaskId(taskId);
+                        assignment.setVolunteerId(volunteer.getId());
+                        assignment.setStatus("ACTIVE");
+
+                        task.setStatus("ACTIVE");
+                        taskRecordRepository.save(task);
+
+                        return taskAssignmentRecordRepository.save(assignment);
+                    } else {
+                        skillFoundButLevelInsufficient = true;
                     }
-
-                    // 7. Assign task
-                    TaskAssignmentRecord assignment = new TaskAssignmentRecord();
-                    assignment.setTaskId(taskId);
-                    assignment.setVolunteerId(volunteer.getId());
-                    assignment.setStatus("ACTIVE");
-
-                    task.setStatus("ACTIVE");
-                    taskRecordRepository.save(task);
-
-                    return taskAssignmentRecordRepository.save(assignment);
                 }
             }
         }
 
-        // 8. Correct exception handling (THIS FIXES YOUR TEST)
-        if (skillFoundButLevelLow) {
-            throw new BadRequestException("Skill level insufficient");
+        // ✅ 4. Correct exception based on failure reason
+        if (skillFoundButLevelInsufficient) {
+            throw new BadRequestException("Volunteer skill level insufficient");
         }
 
         throw new BadRequestException("No suitable volunteer found");
