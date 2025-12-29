@@ -26,13 +26,13 @@ public class AssignmentEvaluationServiceImpl implements AssignmentEvaluationServ
     @Override
     public AssignmentEvaluationRecord evaluateAssignment(AssignmentEvaluationRecord evaluation) {
 
-        // ✅ Test expects assignment existence check
+       
         TaskAssignmentRecord assignment =
                 taskAssignmentRecordRepository.findById(evaluation.getAssignmentId())
                         .orElseThrow(() ->
                                 new ResourceNotFoundException("Assignment not found"));
 
-        // ❌ DO NOT validate status (tests do not expect it)
+        
 
         return assignmentEvaluationRecordRepository.save(evaluation);
     }

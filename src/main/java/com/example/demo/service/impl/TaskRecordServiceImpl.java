@@ -38,40 +38,24 @@ public class TaskRecordServiceImpl implements TaskRecordService {
         return taskRecordRepository.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Task not found"));
-    }
-
-    // =========================
-    // GET TASK BY CODE
-    // =========================
+    } 
     @Override
     public Optional<TaskRecord> getTaskByCode(String taskCode) {
         return taskRecordRepository.findByTaskCode(taskCode);
-    }
-
-    // =========================
-    // GET OPEN TASKS
-    // =========================
+    } 
     @Override
     public List<TaskRecord> getOpenTasks() {
         return taskRecordRepository.findByStatus("OPEN");
-    }
-
-    // =========================
-    // GET ALL TASKS
-    // =========================
+    } 
     @Override
     public List<TaskRecord> getAllTasks() {
         return taskRecordRepository.findAll();
-    }
-
-    // =========================
-    // UPDATE TASK
-    // =========================
+    } 
     @Override
     public TaskRecord updateTask(Long id, TaskRecord updatedTask) {
         TaskRecord existing = getTaskById(id);
 
-        // ✅ Only fields used in tests are updated
+         
         if (updatedTask.getTaskName() != null) {
             existing.setTaskName(updatedTask.getTaskName());
         }
