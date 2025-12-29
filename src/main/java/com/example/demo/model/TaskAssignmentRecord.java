@@ -15,12 +15,10 @@ public class TaskAssignmentRecord {
     private Long volunteerId;
 
     private String status;
-
-    // ✅ No-arg constructor
+ 
     public TaskAssignmentRecord() {
     }
-
-    // ✅ Parameterized constructor
+ 
     public TaskAssignmentRecord(Long taskId, Long volunteerId, String status) {
         this.taskId = taskId;
         this.volunteerId = volunteerId;
