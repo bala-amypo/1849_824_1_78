@@ -27,18 +27,15 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-            // ❌ Disable CSRF (REST API)
+        
             .csrf(csrf -> csrf.disable())
-
-            // ❌ Disable session (JWT based)
+ 
             .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
-
-            // ✅ Authorization rules
+ 
             .authorizeHttpRequests(auth -> auth
-
-                // 🔓 PUBLIC APIs (NO JWT REQUIRED)
+ 
                 .requestMatchers(
                         "/api/auth/**",
                         "/api/volunteers/**",
@@ -50,11 +47,10 @@ public class SecurityConfig {
                         "/v3/api-docs/**"
                 ).permitAll()
 
-                // 🔐 Everything else needs authentication
+                
                 .anyRequest().authenticated()
             );
-
-        // ✅ JWT filter
+ 
         http.addFilterBefore(
                 jwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter.class
@@ -62,8 +58,7 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-    // ✅ Authentication manager
+ 
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration

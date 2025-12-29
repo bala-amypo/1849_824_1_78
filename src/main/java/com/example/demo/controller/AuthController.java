@@ -34,7 +34,7 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // ✅ REGISTER
+    // REGISTER
     @PostMapping("/register")
     public ResponseEntity<Map<String, Object>> register(@RequestBody RegisterRequest request) {
 
@@ -61,7 +61,7 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // We don’t fetch user again — JWT uses authentication object
+       
         String token = jwtTokenProvider.generateToken(authentication, 1L, "USER");
 
         return ResponseEntity.ok(new AuthResponse(token));
