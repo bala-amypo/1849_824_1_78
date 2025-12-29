@@ -47,8 +47,9 @@ package com.example.demo.service.impl;
 import com.example.demo.model.AssignmentEvaluationRecord;
 import com.example.demo.repository.AssignmentEvaluationRecordRepository;
 import com.example.demo.service.AssignmentEvaluationService;
-
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AssignmentEvaluationServiceImpl
@@ -65,5 +66,11 @@ public class AssignmentEvaluationServiceImpl
     public AssignmentEvaluationRecord evaluateAssignment(
             AssignmentEvaluationRecord record) {
         return repository.save(record);
+    }
+
+    @Override
+    public List<AssignmentEvaluationRecord>
+        getEvaluationsByAssignment(Long assignmentId) {
+        return repository.findByAssignmentId(assignmentId);
     }
 }
