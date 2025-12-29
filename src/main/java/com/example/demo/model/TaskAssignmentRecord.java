@@ -78,18 +78,15 @@ public class TaskAssignmentRecord {
 
     private Long volunteerId;
 
-    // ✅ MUST be String (matches repository & service)
     private String status;
 
     private LocalDateTime assignedAt;
 
-    // ✅ REQUIRED by JPA
+    // Required by JPA
     public TaskAssignmentRecord() {
         this.assignedAt = LocalDateTime.now();
         this.status = "ACTIVE";
     }
-
-    // ---------- Getters & Setters ----------
 
     public Long getId() {
         return id;

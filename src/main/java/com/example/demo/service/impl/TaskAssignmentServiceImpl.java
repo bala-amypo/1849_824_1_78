@@ -131,7 +131,7 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
     @Override
     public TaskAssignmentRecord assignTask(Long taskId) {
 
-        // Check if an active assignment exists
+        // Prevent duplicate ACTIVE assignment
         if (taskAssignmentRecordRepository.existsByTaskIdAndStatus(taskId, "ACTIVE")) {
             throw new BadRequestException("ACTIVE assignment exists");
         }
@@ -139,16 +139,19 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
         TaskRecord task = taskRecordRepository.findById(taskId)
                 .orElseThrow(() -> new BadRequestException("Task not found"));
 
-        List<VolunteerProfile> volunteers = volunteerProfileRepository.findByAvailabilityStatus("AVAILABLE");
+        List<VolunteerProfile> volunteers =
+                volunteerProfileRepository.findByAvailabilityStatus("AVAILABLE");
 
         if (volunteers.isEmpty()) {
             throw new BadRequestException("No AVAILABLE volunteers");
         }
 
         for (VolunteerProfile volunteer : volunteers) {
-            Long volunteerId = volunteer.getId().longValue(); // Convert Integer → Long if needed
 
-            List<VolunteerSkillRecord> skills = volunteerSkillRecordRepository.findByVolunteerId(volunteerId);
+            Long volunteerId = volunteer.getId(); // ✅ FIXED
+
+            List<VolunteerSkillRecord> skills =
+                    volunteerSkillRecordRepository.findByVolunteerId(volunteerId);
 
             for (VolunteerSkillRecord skill : skills) {
                 if (skill.getSkillName().equals(task.getRequiredSkill()) &&
@@ -158,6 +161,7 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
                     TaskAssignmentRecord record = new TaskAssignmentRecord();
                     record.setTaskId(taskId);
                     record.setVolunteerId(volunteerId);
+                    record.setStatus("ACTIVE");
 
                     task.setStatus("ACTIVE");
                     taskRecordRepository.save(task);
