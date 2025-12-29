@@ -31,25 +31,21 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
 
     @Override
     public TaskAssignmentRecord assignTask(Long taskId) {
-
-        // 1️⃣ Fetch task
+ 
         TaskRecord task = taskRecordRepository.findById(taskId)
                 .orElseThrow(() -> new BadRequestException("Task not found"));
-
-        // 2️⃣ Ensure only one ACTIVE assignment
+ 
         if (taskAssignmentRecordRepository.existsByTaskIdAndStatus(taskId, "ACTIVE")) {
             throw new BadRequestException("ACTIVE assignment already exists");
-        }
+        } 
 
-        // 3️⃣ Fetch AVAILABLE volunteers
         List<VolunteerProfile> volunteers =
                 volunteerProfileRepository.findByAvailabilityStatus("AVAILABLE");
 
         if (volunteers.isEmpty()) {
             throw new BadRequestException("No AVAILABLE volunteers");
         }
-
-        // 4️⃣ Match volunteer by skill and level
+ 
         for (VolunteerProfile volunteer : volunteers) {
 
             List<VolunteerSkillRecord> skills =
@@ -64,13 +60,12 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
                     int requiredRank =
                             SkillLevelUtil.levelRank(task.getRequiredSkillLevel());
 
-                    // 5️⃣ Skill level insufficient
+                   
                     if (volunteerRank < requiredRank) {
                         throw new BadRequestException(
                                 "Volunteer does not meet required skill level");
                     }
-
-                    // 6️⃣ Assign task
+ 
                     TaskAssignmentRecord assignment = new TaskAssignmentRecord();
                     assignment.setTaskId(taskId);
                     assignment.setVolunteerId(volunteer.getId());
