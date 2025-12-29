@@ -2,14 +2,8 @@ package com.example.demo.service.impl;
 
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.TaskAssignmentRecord;
-import com.example.demo.model.TaskRecord;
-import com.example.demo.model.VolunteerProfile;
-import com.example.demo.model.VolunteerSkillRecord;
-import com.example.demo.repository.TaskAssignmentRecordRepository;
-import com.example.demo.repository.TaskRecordRepository;
-import com.example.demo.repository.VolunteerProfileRepository;
-import com.example.demo.repository.VolunteerSkillRecordRepository;
+import com.example.demo.model.*;
+import com.example.demo.repository.*;
 import com.example.demo.service.TaskAssignmentService;
 import com.example.demo.util.SkillLevelUtil;
 import org.springframework.stereotype.Service;
@@ -37,64 +31,39 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
 
     @Override
     public TaskAssignmentRecord assignTask(Long taskId) {
-
-        // ✅ 1. Load task FIRST (test requirement)
-        TaskRecord task = taskRecordRepository.findById(taskId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Task not found"));
-
-        // ✅ 2. Check for existing ACTIVE assignment
         if (taskAssignmentRecordRepository.existsByTaskIdAndStatus(taskId, "ACTIVE")) {
-            throw new BadRequestException("Task already has an ACTIVE assignment");
+            throw new BadRequestException("Task already assigned");
         }
 
-        // ✅ 3. Fetch AVAILABLE volunteers
-        List<VolunteerProfile> availableVolunteers =
+        TaskRecord task = taskRecordRepository.findById(taskId)
+                .orElseThrow(() -> new ResourceNotFoundException("Task not found"));
+
+        List<VolunteerProfile> volunteers =
                 volunteerProfileRepository.findByAvailabilityStatus("AVAILABLE");
 
-        if (availableVolunteers.isEmpty()) {
-            throw new BadRequestException("No AVAILABLE volunteers");
-        }
-
-        VolunteerProfile selectedVolunteer = null;
-
-        for (VolunteerProfile volunteer : availableVolunteers) {
+        for (VolunteerProfile v : volunteers) {
             List<VolunteerSkillRecord> skills =
-                    volunteerSkillRecordRepository.findByVolunteerId(volunteer.getId());
+                    volunteerSkillRecordRepository.findByVolunteerId(v.getId());
 
-            for (VolunteerSkillRecord skill : skills) {
-                if (skill.getSkillName().equals(task.getRequiredSkill()) &&
-                        SkillLevelUtil.hasRequiredSkillLevel(
-                                skill.getSkillLevel(),
-                                task.getRequiredSkillLevel())) {
+            for (VolunteerSkillRecord s : skills) {
+                if (s.getSkillName().equals(task.getRequiredSkill())
+                        && SkillLevelUtil.hasRequiredSkillLevel(
+                                s.getSkillLevel(), task.getRequiredSkillLevel())) {
 
-                    selectedVolunteer = volunteer;
-                    break;
+                    TaskAssignmentRecord assignment = new TaskAssignmentRecord();
+                    assignment.setTaskId(taskId);
+                    assignment.setVolunteerId(v.getId());
+                    assignment.setStatus("ACTIVE");
+
+                    task.setStatus("ACTIVE");
+                    taskRecordRepository.save(task);
+
+                    return taskAssignmentRecordRepository.save(assignment);
                 }
             }
-
-            if (selectedVolunteer != null) break;
         }
 
-        if (selectedVolunteer == null) {
-            throw new BadRequestException(
-                    "No volunteer meets the required skill level");
-        }
-
-        // ✅ 4. Create assignment
-        TaskAssignmentRecord assignment = new TaskAssignmentRecord();
-        assignment.setTaskId(taskId);
-        assignment.setVolunteerId(selectedVolunteer.getId());
-        assignment.setStatus("ACTIVE");
-
-        TaskAssignmentRecord saved =
-                taskAssignmentRecordRepository.save(assignment);
-
-        // ✅ 5. Update task status
-        task.setStatus("ACTIVE");
-        taskRecordRepository.save(task);
-
-        return saved;
+        throw new BadRequestException("No suitable volunteer found");
     }
 
     @Override
