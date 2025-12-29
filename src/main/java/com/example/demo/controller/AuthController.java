@@ -48,7 +48,7 @@ public class AuthController {
         return ResponseEntity.ok(user);
     }
 
-    // ✅ LOGIN
+    // LOGIN
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
 
