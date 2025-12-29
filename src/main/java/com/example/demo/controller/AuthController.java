@@ -9,9 +9,6 @@ import java.util.Map;
 @RequestMapping("/auth")
 public class AuthController {
 
-    // ⚠️ Controllers are NOT used in tests
-    // This class exists ONLY to satisfy compilation
-
     @PostMapping("/register")
     public Map<String, Object> register() {
         Map<String, Object> response = new HashMap<>();
