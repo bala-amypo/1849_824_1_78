@@ -56,7 +56,6 @@ package com.example.demo.service.impl;
 import com.example.demo.model.VolunteerProfile;
 import com.example.demo.repository.VolunteerProfileRepository;
 import com.example.demo.service.VolunteerProfileService;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,19 +66,22 @@ public class VolunteerProfileServiceImpl
 
     private final VolunteerProfileRepository repository;
 
-    public VolunteerProfileServiceImpl(
-            VolunteerProfileRepository repository) {
+    public VolunteerProfileServiceImpl(VolunteerProfileRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public VolunteerProfile createVolunteer(
-            VolunteerProfile profile) {
+    public VolunteerProfile createVolunteer(VolunteerProfile profile) {
         return repository.save(profile);
     }
 
     @Override
     public List<VolunteerProfile> getAllVolunteers() {
         return repository.findAll();
+    }
+
+    @Override
+    public VolunteerProfile getVolunteerById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 }

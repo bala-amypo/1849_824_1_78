@@ -181,8 +181,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.time.LocalDateTime;
-
 @Entity
 public class TaskRecord {
 
@@ -190,20 +188,16 @@ public class TaskRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // 🔴 REQUIRED BY TESTS
+    private String taskCode;
+
     private String taskName;
-
     private String requiredSkill;
-
     private String requiredSkillLevel;
-
     private String priority;
-
     private String status;
 
-    private LocalDateTime createdAt;
-
     public TaskRecord() {
-        this.createdAt = LocalDateTime.now();
         this.status = "OPEN";
     }
 
@@ -211,8 +205,12 @@ public class TaskRecord {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getTaskCode() {
+        return taskCode;
+    }
+
+    public void setTaskCode(String taskCode) {
+        this.taskCode = taskCode;
     }
 
     public String getTaskName() {
@@ -253,13 +251,5 @@ public class TaskRecord {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }

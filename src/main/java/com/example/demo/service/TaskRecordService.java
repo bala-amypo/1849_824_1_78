@@ -21,7 +21,6 @@
 package com.example.demo.service;
 
 import com.example.demo.model.TaskRecord;
-
 import java.util.List;
 
 public interface TaskRecordService {
@@ -29,4 +28,8 @@ public interface TaskRecordService {
     TaskRecord createTask(TaskRecord task);
 
     List<TaskRecord> getAllTasks();
+
+    List<TaskRecord> getOpenTasks();
+
+    TaskRecord getTaskByCode(String taskCode);
 }

@@ -59,7 +59,6 @@ package com.example.demo.service.impl;
 import com.example.demo.model.TaskRecord;
 import com.example.demo.repository.TaskRecordRepository;
 import com.example.demo.service.TaskRecordService;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -70,8 +69,7 @@ public class TaskRecordServiceImpl
 
     private final TaskRecordRepository repository;
 
-    public TaskRecordServiceImpl(
-            TaskRecordRepository repository) {
+    public TaskRecordServiceImpl(TaskRecordRepository repository) {
         this.repository = repository;
     }
 
@@ -83,5 +81,15 @@ public class TaskRecordServiceImpl
     @Override
     public List<TaskRecord> getAllTasks() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<TaskRecord> getOpenTasks() {
+        return repository.findByStatus("OPEN");
+    }
+
+    @Override
+    public TaskRecord getTaskByCode(String taskCode) {
+        return repository.findByTaskCode(taskCode);
     }
 }

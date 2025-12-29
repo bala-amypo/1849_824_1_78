@@ -33,7 +33,6 @@ package com.example.demo.service.impl;
 import com.example.demo.model.VolunteerSkillRecord;
 import com.example.demo.repository.VolunteerSkillRecordRepository;
 import com.example.demo.service.VolunteerSkillService;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,7 +49,7 @@ public class VolunteerSkillServiceImpl
     }
 
     @Override
-    public VolunteerSkillRecord addSkill(
+    public VolunteerSkillRecord addOrUpdateSkill(
             VolunteerSkillRecord skill) {
         return repository.save(skill);
     }
