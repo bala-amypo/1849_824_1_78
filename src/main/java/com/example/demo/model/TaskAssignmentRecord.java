@@ -65,6 +65,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class TaskAssignmentRecord {
 
@@ -72,9 +74,22 @@ public class TaskAssignmentRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long taskId;          // Use Long
-    private Long volunteerId;     // Use Long
+    private Long taskId;
+
+    private Long volunteerId;
+
+    // ✅ MUST be String (matches repository & service)
     private String status;
+
+    private LocalDateTime assignedAt;
+
+    // ✅ REQUIRED by JPA
+    public TaskAssignmentRecord() {
+        this.assignedAt = LocalDateTime.now();
+        this.status = "ACTIVE";
+    }
+
+    // ---------- Getters & Setters ----------
 
     public Long getId() {
         return id;
@@ -106,5 +121,13 @@ public class TaskAssignmentRecord {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public LocalDateTime getAssignedAt() {
+        return assignedAt;
+    }
+
+    public void setAssignedAt(LocalDateTime assignedAt) {
+        this.assignedAt = assignedAt;
     }
 }
