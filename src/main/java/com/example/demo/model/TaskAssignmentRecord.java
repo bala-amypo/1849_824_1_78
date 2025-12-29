@@ -1,9 +1,73 @@
+// // // package com.example.demo.model;
+
+// // // import jakarta.persistence.*;
+
+// // // @Entity
+// // // @Table(name = "task_assignment_records")
+// // // public class TaskAssignmentRecord {
+
+// // //     @Id
+// // //     @GeneratedValue(strategy = GenerationType.IDENTITY)
+// // //     private Long id;
+
+// // //     private Long taskId;
+
+// // //     private Long volunteerId;
+
+// // //     private String status;
+ 
+// // //     public TaskAssignmentRecord() {
+// // //     }
+ 
+// // //     public TaskAssignmentRecord(Long taskId, Long volunteerId, String status) {
+// // //         this.taskId = taskId;
+// // //         this.volunteerId = volunteerId;
+// // //         this.status = status;
+// // //     }
+
+// // //     // Getters & Setters
+// // //     public Long getId() {
+// // //         return id;
+// // //     }
+
+// // //     public Long getTaskId() {
+// // //         return taskId;
+// // //     }
+
+// // //     public Long getVolunteerId() {
+// // //         return volunteerId;
+// // //     }
+
+// // //     public String getStatus() {
+// // //         return status;
+// // //     }
+
+// // //     public void setId(Long id) {
+// // //         this.id = id;
+// // //     }
+
+// // //     public void setTaskId(Long taskId) {
+// // //         this.taskId = taskId;
+// // //     }
+
+// // //     public void setVolunteerId(Long volunteerId) {
+// // //         this.volunteerId = volunteerId;
+// // //     }
+
+// // //     public void setStatus(String status) {
+// // //         this.status = status;
+// // //     }
+// // // }
 // // package com.example.demo.model;
 
-// // import jakarta.persistence.*;
+// // import jakarta.persistence.Entity;
+// // import jakarta.persistence.GeneratedValue;
+// // import jakarta.persistence.GenerationType;
+// // import jakarta.persistence.Id;
+
+// // import java.time.LocalDateTime;
 
 // // @Entity
-// // @Table(name = "task_assignment_records")
 // // public class TaskAssignmentRecord {
 
 // //     @Id
@@ -15,47 +79,53 @@
 // //     private Long volunteerId;
 
 // //     private String status;
- 
+
+// //     private LocalDateTime assignedAt;
+
+// //     // Required by JPA
 // //     public TaskAssignmentRecord() {
-// //     }
- 
-// //     public TaskAssignmentRecord(Long taskId, Long volunteerId, String status) {
-// //         this.taskId = taskId;
-// //         this.volunteerId = volunteerId;
-// //         this.status = status;
+// //         this.assignedAt = LocalDateTime.now();
+// //         this.status = "ACTIVE";
 // //     }
 
-// //     // Getters & Setters
 // //     public Long getId() {
 // //         return id;
-// //     }
-
-// //     public Long getTaskId() {
-// //         return taskId;
-// //     }
-
-// //     public Long getVolunteerId() {
-// //         return volunteerId;
-// //     }
-
-// //     public String getStatus() {
-// //         return status;
 // //     }
 
 // //     public void setId(Long id) {
 // //         this.id = id;
 // //     }
 
+// //     public Long getTaskId() {
+// //         return taskId;
+// //     }
+
 // //     public void setTaskId(Long taskId) {
 // //         this.taskId = taskId;
+// //     }
+
+// //     public Long getVolunteerId() {
+// //         return volunteerId;
 // //     }
 
 // //     public void setVolunteerId(Long volunteerId) {
 // //         this.volunteerId = volunteerId;
 // //     }
 
+// //     public String getStatus() {
+// //         return status;
+// //     }
+
 // //     public void setStatus(String status) {
 // //         this.status = status;
+// //     }
+
+// //     public LocalDateTime getAssignedAt() {
+// //         return assignedAt;
+// //     }
+
+// //     public void setAssignedAt(LocalDateTime assignedAt) {
+// //         this.assignedAt = assignedAt;
 // //     }
 // // }
 // package com.example.demo.model;
@@ -82,7 +152,6 @@
 
 //     private LocalDateTime assignedAt;
 
-//     // Required by JPA
 //     public TaskAssignmentRecord() {
 //         this.assignedAt = LocalDateTime.now();
 //         this.status = "ACTIVE";
@@ -130,70 +199,75 @@
 // }
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "task_assignment_records")
 public class TaskAssignmentRecord {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @Column(name = "task_id")
     private Long taskId;
-
+    
+    @Column(name = "volunteer_id")
     private Long volunteerId;
-
+    
     private String status;
-
+    
+    @Column(name = "assigned_at")
     private LocalDateTime assignedAt;
-
+    
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+    
     public TaskAssignmentRecord() {
-        this.assignedAt = LocalDateTime.now();
         this.status = "ACTIVE";
+        this.assignedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(Long taskId) {
+    
+    public TaskAssignmentRecord(Long taskId, Long volunteerId, String status) {
         this.taskId = taskId;
-    }
-
-    public Long getVolunteerId() {
-        return volunteerId;
-    }
-
-    public void setVolunteerId(Long volunteerId) {
         this.volunteerId = volunteerId;
+        this.status = status != null ? status : "ACTIVE";
+        this.assignedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
-
-    public String getStatus() {
-        return status;
+    
+    @PrePersist
+    protected void onCreate() {
+        if (status == null) {
+            status = "ACTIVE";
+        }
+        assignedAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
-
-    public void setStatus(String status) {
-        this.status = status;
+    
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
     }
-
-    public LocalDateTime getAssignedAt() {
-        return assignedAt;
-    }
-
-    public void setAssignedAt(LocalDateTime assignedAt) {
-        this.assignedAt = assignedAt;
-    }
+    
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    
+    public Long getTaskId() { return taskId; }
+    public void setTaskId(Long taskId) { this.taskId = taskId; }
+    
+    public Long getVolunteerId() { return volunteerId; }
+    public void setVolunteerId(Long volunteerId) { this.volunteerId = volunteerId; }
+    
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+    
+    public LocalDateTime getAssignedAt() { return assignedAt; }
+    public void setAssignedAt(LocalDateTime assignedAt) { this.assignedAt = assignedAt; }
+    
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 }
