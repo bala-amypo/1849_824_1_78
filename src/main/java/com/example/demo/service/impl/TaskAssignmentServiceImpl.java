@@ -7,7 +7,6 @@ import com.example.demo.service.TaskAssignmentService;
 import com.example.demo.util.SkillLevelUtil;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -37,12 +36,12 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
         TaskRecord task = taskRecordRepository.findById(taskId)
                 .orElseThrow(() -> new BadRequestException("Task not found"));
 
-        // 2️⃣ Ensure single ACTIVE assignment
+        // 2️⃣ Ensure only one ACTIVE assignment
         if (taskAssignmentRecordRepository.existsByTaskIdAndStatus(taskId, "ACTIVE")) {
             throw new BadRequestException("ACTIVE assignment already exists");
         }
 
-        // 3️⃣ Fetch AVAILABLE volunteers (repository usage ✔)
+        // 3️⃣ Fetch AVAILABLE volunteers
         List<VolunteerProfile> volunteers =
                 volunteerProfileRepository.findByAvailabilityStatus("AVAILABLE");
 
@@ -50,7 +49,7 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
             throw new BadRequestException("No AVAILABLE volunteers");
         }
 
-        // 4️⃣ Match volunteer by skill + level
+        // 4️⃣ Match volunteer by skill and level
         for (VolunteerProfile volunteer : volunteers) {
 
             List<VolunteerSkillRecord> skills =
@@ -65,18 +64,17 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
                     int requiredRank =
                             SkillLevelUtil.levelRank(task.getRequiredSkillLevel());
 
-                    // 5️⃣ Skill level insufficient ❌
+                    // 5️⃣ Skill level insufficient
                     if (volunteerRank < requiredRank) {
                         throw new BadRequestException(
                                 "Volunteer does not meet required skill level");
                     }
 
-                    // 6️⃣ Assign task ✔
+                    // 6️⃣ Assign task
                     TaskAssignmentRecord assignment = new TaskAssignmentRecord();
                     assignment.setTaskId(taskId);
                     assignment.setVolunteerId(volunteer.getId());
                     assignment.setStatus("ACTIVE");
-                    assignment.setAssignedAt(LocalDateTime.now());
 
                     task.setStatus("ASSIGNED");
 
