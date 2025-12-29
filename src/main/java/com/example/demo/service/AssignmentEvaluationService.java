@@ -1,77 +1,12 @@
-// // // package com.example.demo.service;
+package com.example.demo.service;
 
-// // // import com.example.demo.model.AssignmentEvaluationRecord;
-// // // import java.util.List;
-
-// // // public interface AssignmentEvaluationService {
-
-// // //     AssignmentEvaluationRecord evaluateAssignment(AssignmentEvaluationRecord record);
-
-// // //     List<AssignmentEvaluationRecord> getEvaluationsByAssignment(Long assignmentId);
-// // // }
-// // package com.example.demo.service;
-
-// // import com.example.demo.model.AssignmentEvaluationRecord;
-// // import java.util.List;
-
-// // public interface AssignmentEvaluationService {
-
-// //     AssignmentEvaluationRecord evaluateAssignment(
-// //             AssignmentEvaluationRecord record);
-
-// //     List<AssignmentEvaluationRecord>
-// //         getEvaluationsByAssignment(Long assignmentId);
-// // }
-// package com.example.demo.service;
-
-// import com.example.demo.model.AssignmentEvaluationRecord;
-// import java.util.List;
-
-// public interface AssignmentEvaluationService {
-    
-//     AssignmentEvaluationRecord evaluateAssignment(AssignmentEvaluationRecord evaluation);
-    
-//     List<AssignmentEvaluationRecord> getEvaluationsByAssignment(Long assignmentId);
-// }
-package com.example.demo.service.impl;
-
-import com.example.demo.exception.BadRequestException;
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.AssignmentEvaluationRecord;
-import com.example.demo.model.TaskAssignmentRecord;
-import com.example.demo.repository.AssignmentEvaluationRecordRepository;
-import com.example.demo.repository.TaskAssignmentRecordRepository;
-import com.example.demo.service.AssignmentEvaluationService;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-@Service
-public class AssignmentEvaluationServiceImpl implements AssignmentEvaluationService {
+public interface AssignmentEvaluationService {
 
-    private final AssignmentEvaluationRecordRepository assignmentEvaluationRecordRepository;
-    private final TaskAssignmentRecordRepository taskAssignmentRecordRepository;
+    AssignmentEvaluationRecord evaluateAssignment(
+            AssignmentEvaluationRecord evaluation);
 
-    public AssignmentEvaluationServiceImpl(AssignmentEvaluationRecordRepository assignmentEvaluationRecordRepository,
-                                         TaskAssignmentRecordRepository taskAssignmentRecordRepository) {
-        this.assignmentEvaluationRecordRepository = assignmentEvaluationRecordRepository;
-        this.taskAssignmentRecordRepository = taskAssignmentRecordRepository;
-    }
-
-    @Override
-    public AssignmentEvaluationRecord evaluateAssignment(AssignmentEvaluationRecord evaluation) {
-        TaskAssignmentRecord assignment = taskAssignmentRecordRepository.findById(evaluation.getAssignmentId())
-                .orElseThrow(() -> new ResourceNotFoundException("Assignment not found"));
-        
-        if (!"COMPLETED".equals(assignment.getStatus())) {
-            throw new BadRequestException("Assignment must be COMPLETED before evaluation");
-        }
-        
-        return assignmentEvaluationRecordRepository.save(evaluation);
-    }
-
-    @Override
-    public List<AssignmentEvaluationRecord> getEvaluationsByAssignment(Long assignmentId) {
-        return assignmentEvaluationRecordRepository.findByAssignmentId(assignmentId);
-    }
+    List<AssignmentEvaluationRecord> getEvaluationsByAssignment(Long assignmentId);
 }
