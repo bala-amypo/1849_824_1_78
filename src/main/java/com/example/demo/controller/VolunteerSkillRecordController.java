@@ -50,10 +50,11 @@ public class VolunteerSkillRecordController {
         this.service = service;
     }
 
+    // 🔥 FIXED METHOD NAME
     @PostMapping
-    public VolunteerSkillRecord addSkill(
+    public VolunteerSkillRecord addOrUpdateSkill(
             @RequestBody VolunteerSkillRecord skill) {
-        return service.addSkill(skill);
+        return service.addOrUpdateSkill(skill);
     }
 
     @GetMapping("/volunteer/{volunteerId}")
