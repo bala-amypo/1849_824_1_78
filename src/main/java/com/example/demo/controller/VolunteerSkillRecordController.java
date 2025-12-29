@@ -26,3 +26,40 @@
 //         return service.getSkillsByVolunteer(volunteerId);
 //     }
 // }
+package com.example.demo.controller;
+
+import com.example.demo.model.VolunteerSkillRecord;
+import com.example.demo.service.VolunteerSkillRecordService;
+
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/volunteer-skills")
+public class VolunteerSkillRecordController {
+
+    private final VolunteerSkillRecordService service;
+
+    public VolunteerSkillRecordController(
+            VolunteerSkillRecordService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public VolunteerSkillRecord addSkill(
+            @RequestBody VolunteerSkillRecord skill) {
+        return service.addSkill(skill);
+    }
+
+    @GetMapping("/volunteer/{volunteerId}")
+    public List<VolunteerSkillRecord> getSkillsByVolunteer(
+            @PathVariable Long volunteerId) {
+        return service.getSkillsByVolunteer(volunteerId);
+    }
+}
