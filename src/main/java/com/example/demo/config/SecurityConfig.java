@@ -1,7 +1,6 @@
 package com.example.demo.config;
 
 import com.example.demo.security.JwtAuthenticationFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,28 +17,44 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
+            // ❌ Disable CSRF (REST API)
             .csrf(csrf -> csrf.disable())
+
+            // ❌ Disable session (JWT based)
             .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
+
+            // ✅ Authorization rules
             .authorizeHttpRequests(auth -> auth
+
+                // 🔓 PUBLIC APIs (NO JWT REQUIRED)
                 .requestMatchers(
                         "/api/auth/**",
+                        "/api/volunteers/**",
+                        "/api/tasks/**",
+                        "/api/assignments/**",
+                        "/api/evaluations/**",
+                        "/hello-servlet",
                         "/swagger-ui/**",
-                        "/v3/api-docs/**",
-                        "/hello-servlet"
+                        "/v3/api-docs/**"
                 ).permitAll()
-                .requestMatchers("/api/**").authenticated()
-                .anyRequest().permitAll()
+
+                // 🔐 Everything else needs authentication
+                .anyRequest().authenticated()
             );
 
+        // ✅ JWT filter
         http.addFilterBefore(
                 jwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter.class
@@ -48,6 +63,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // ✅ Authentication manager
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration
@@ -55,6 +71,7 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    // ✅ Password encoder
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
