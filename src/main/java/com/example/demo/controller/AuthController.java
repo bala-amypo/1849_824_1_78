@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -21,26 +22,29 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final CustomUserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
-    // ✅ Constructor Injection
     public AuthController(AuthenticationManager authenticationManager,
                           JwtTokenProvider jwtTokenProvider,
-                          CustomUserDetailsService userDetailsService) {
+                          CustomUserDetailsService userDetailsService,
+                          PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // ✅ REGISTER
     @PostMapping("/register")
     public ResponseEntity<Map<String, Object>> register(@RequestBody RegisterRequest request) {
-        Map<String, Object> user =
-                userDetailsService.registerUser(
-                        request.getFullName(),
-                        request.getEmail(),
-                        request.getPassword(),
-                        request.getRole()
-                );
+
+        Map<String, Object> user = userDetailsService.registerUser(
+                request.getName(),
+                request.getEmail(),
+                passwordEncoder.encode(request.getPassword()),
+                request.getRole()
+        );
+
         return ResponseEntity.ok(user);
     }
 
@@ -57,14 +61,8 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        Map<String, Object> user =
-                userDetailsService.getUserByEmail(loginRequest.getUsername());
-
-        String token = jwtTokenProvider.generateToken(
-                authentication,
-                (Long) user.get("userId"),
-                (String) user.get("role")
-        );
+        // We don’t fetch user again — JWT uses authentication object
+        String token = jwtTokenProvider.generateToken(authentication, 1L, "USER");
 
         return ResponseEntity.ok(new AuthResponse(token));
     }
