@@ -21,13 +21,11 @@ public class VolunteerProfile {
     private String availabilityStatus;
 
     private LocalDateTime createdAt;
-
-    // ✅ REQUIRED by JPA
+ 
     public VolunteerProfile() {
         this.createdAt = LocalDateTime.now();
     }
-
-    // ✅ REQUIRED for compilation (services/controllers use this)
+ 
     public VolunteerProfile(String volunteerId, String fullName, String email) {
         this.volunteerId = volunteerId;
         this.fullName = fullName;
@@ -35,7 +33,7 @@ public class VolunteerProfile {
         this.createdAt = LocalDateTime.now();
     }
 
-    // ================= GETTERS & SETTERS =================
+    
 
     public Long getId() {
         return id;
