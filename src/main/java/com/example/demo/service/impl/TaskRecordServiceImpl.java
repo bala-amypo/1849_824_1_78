@@ -16,23 +16,15 @@ public class TaskRecordServiceImpl implements TaskRecordService {
 
     public TaskRecordServiceImpl(TaskRecordRepository taskRecordRepository) {
         this.taskRecordRepository = taskRecordRepository;
-    }
-
-    // =========================
-    // CREATE TASK
-    // =========================
+    } 
     @Override
     public TaskRecord createTask(TaskRecord task) {
-        // ✅ Test expects default status = OPEN
+         
         if (task.getStatus() == null) {
             task.setStatus("OPEN");
         }
         return taskRecordRepository.save(task);
-    }
-
-    // =========================
-    // GET TASK BY ID
-    // =========================
+    } 
     @Override
     public TaskRecord getTaskById(Long id) {
         return taskRecordRepository.findById(id)
