@@ -19,12 +19,12 @@ public class AssignmentEvaluationRecord {
     private String feedback;
     private LocalDateTime evaluatedAt;
 
-    // ✅ REQUIRED by JPA
+ 
     public AssignmentEvaluationRecord() {
         this.evaluatedAt = LocalDateTime.now();
     }
 
-    // ✅ REQUIRED for controller/service compilation
+     
     public AssignmentEvaluationRecord(Long assignmentId,
                                       Integer rating,
                                       String feedback) {
@@ -34,7 +34,7 @@ public class AssignmentEvaluationRecord {
         this.evaluatedAt = LocalDateTime.now();
     }
 
-    // ================= GETTERS & SETTERS =================
+    
 
     public Long getId() {
         return id;
