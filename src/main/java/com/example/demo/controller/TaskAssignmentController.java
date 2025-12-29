@@ -12,13 +12,11 @@ import java.util.List;
 public class TaskAssignmentController {
 
     private final TaskAssignmentService taskAssignmentService;
-
-    // ✅ Constructor Injection
+ 
     public TaskAssignmentController(TaskAssignmentService taskAssignmentService) {
         this.taskAssignmentService = taskAssignmentService;
     }
-
-    // ✅ Assign task
+ 
     @PostMapping("/{taskId}")
     public ResponseEntity<TaskAssignmentRecord> assignTask(
             @PathVariable Long taskId) {
@@ -29,7 +27,7 @@ public class TaskAssignmentController {
         return ResponseEntity.ok(assignment);
     }
 
-    // ✅ Get assignments by task
+  
     @GetMapping("/task/{taskId}")
     public ResponseEntity<List<TaskAssignmentRecord>> getAssignmentsByTask(
             @PathVariable Long taskId) {
@@ -39,7 +37,7 @@ public class TaskAssignmentController {
         );
     }
 
-    // ✅ Get assignments by volunteer
+     
     @GetMapping("/volunteer/{volunteerId}")
     public ResponseEntity<List<TaskAssignmentRecord>> getAssignmentsByVolunteer(
             @PathVariable Long volunteerId) {
@@ -49,7 +47,7 @@ public class TaskAssignmentController {
         );
     }
 
-    // ✅ Get all assignments
+   
     @GetMapping
     public ResponseEntity<List<TaskAssignmentRecord>> getAllAssignments() {
         return ResponseEntity.ok(

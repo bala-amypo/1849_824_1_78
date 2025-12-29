@@ -13,13 +13,11 @@ import java.util.Optional;
 public class VolunteerProfileController {
 
     private final VolunteerProfileService volunteerProfileService;
-
-    // ✅ Constructor Injection
+ 
     public VolunteerProfileController(VolunteerProfileService volunteerProfileService) {
         this.volunteerProfileService = volunteerProfileService;
     }
-
-    // ✅ Create volunteer
+ 
     @PostMapping
     public ResponseEntity<VolunteerProfile> createVolunteer(
             @RequestBody VolunteerProfile volunteer) {
@@ -29,7 +27,7 @@ public class VolunteerProfileController {
         );
     }
 
-    // ✅ Get volunteer by DB ID
+  
     @GetMapping("/{id}")
     public ResponseEntity<VolunteerProfile> getVolunteerById(
             @PathVariable Long id) {
@@ -38,8 +36,7 @@ public class VolunteerProfileController {
                 volunteerProfileService.getVolunteerById(id)
         );
     }
-
-    // ✅ Get volunteer by Volunteer ID (BUSINESS KEY)
+ 
     @GetMapping("/lookup/{volunteerId}")
     public ResponseEntity<Optional<VolunteerProfile>> getByVolunteerId(
             @PathVariable String volunteerId) {
@@ -49,7 +46,7 @@ public class VolunteerProfileController {
         );
     }
 
-    // ✅ Get all volunteers
+   
     @GetMapping
     public ResponseEntity<List<VolunteerProfile>> getAllVolunteers() {
 
@@ -58,7 +55,7 @@ public class VolunteerProfileController {
         );
     }
 
-    // ✅ Get available volunteers
+  
     @GetMapping("/available")
     public ResponseEntity<List<VolunteerProfile>> getAvailableVolunteers() {
 

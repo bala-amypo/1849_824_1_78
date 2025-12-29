@@ -12,13 +12,11 @@ import java.util.List;
 public class VolunteerSkillController {
 
     private final VolunteerSkillService volunteerSkillService;
-
-    // ✅ Constructor Injection
+ 
     public VolunteerSkillController(VolunteerSkillService volunteerSkillService) {
         this.volunteerSkillService = volunteerSkillService;
     }
-
-    // ✅ Add or update volunteer skill
+ 
     @PostMapping
     public ResponseEntity<VolunteerSkillRecord> addOrUpdateSkill(
             @RequestBody VolunteerSkillRecord skill) {
@@ -27,8 +25,7 @@ public class VolunteerSkillController {
                 volunteerSkillService.addOrUpdateSkill(skill)
         );
     }
-
-    // ✅ Get skills by volunteer
+ 
     @GetMapping("/volunteer/{volunteerId}")
     public ResponseEntity<List<VolunteerSkillRecord>> getSkillsByVolunteer(
             @PathVariable Long volunteerId) {
