@@ -91,7 +91,7 @@
 //         return taskAssignmentRecordRepository.findAll();
 //     }
 // }
-package com.example.demo.service.impl;
+ package com.example.demo.service.impl;
 
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.TaskAssignmentRecord;
@@ -131,13 +131,16 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
     @Override
     public TaskAssignmentRecord assignTask(Long taskId) {
 
+        // Check if an active assignment already exists
         if (taskAssignmentRecordRepository.existsByTaskIdAndStatus(taskId, "ACTIVE")) {
             throw new BadRequestException("ACTIVE assignment exists");
         }
 
+        // Fetch the task
         TaskRecord task = taskRecordRepository.findById(taskId)
                 .orElseThrow(() -> new BadRequestException("Task not found"));
 
+        // Get available volunteers
         List<VolunteerProfile> volunteers =
                 volunteerProfileRepository.findByAvailabilityStatus("AVAILABLE");
 
@@ -145,19 +148,25 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
             throw new BadRequestException("No AVAILABLE volunteers");
         }
 
+        // Loop through volunteers
         for (VolunteerProfile volunteer : volunteers) {
+            // Convert volunteer ID to Long if it’s Integer
+            Long volunteerId = volunteer.getId().longValue();
+
             List<VolunteerSkillRecord> skills =
-                    volunteerSkillRecordRepository.findByVolunteerId(volunteer.getId());
+                    volunteerSkillRecordRepository.findByVolunteerId(volunteerId);
 
             for (VolunteerSkillRecord skill : skills) {
                 if (skill.getSkillName().equals(task.getRequiredSkill()) &&
                         SkillLevelUtil.levelRank(skill.getSkillLevel()) >=
                                 SkillLevelUtil.levelRank(task.getRequiredSkillLevel())) {
 
+                    // Create assignment record
                     TaskAssignmentRecord record = new TaskAssignmentRecord();
-                    record.setTaskId(taskId);             // Keep as Long
-                    record.setVolunteerId(volunteer.getId()); // Keep as Long
+                    record.setTaskId(taskId);          // Long
+                    record.setVolunteerId(volunteerId); // Long
 
+                    // Update task status
                     task.setStatus("ACTIVE");
                     taskRecordRepository.save(task);
 
@@ -171,12 +180,12 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
 
     @Override
     public List<TaskAssignmentRecord> getAssignmentsByTask(Long taskId) {
-        return taskAssignmentRecordRepository.findByTaskId(taskId); // Long
+        return taskAssignmentRecordRepository.findByTaskId(taskId);
     }
 
     @Override
     public List<TaskAssignmentRecord> getAssignmentsByVolunteer(Long volunteerId) {
-        return taskAssignmentRecordRepository.findByVolunteerId(volunteerId); // Long
+        return taskAssignmentRecordRepository.findByVolunteerId(volunteerId);
     }
 
     @Override
