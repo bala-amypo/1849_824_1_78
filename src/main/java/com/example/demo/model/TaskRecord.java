@@ -92,17 +92,24 @@ public class TaskRecord {
     private String taskName;
     private String priority;
 
-    // Default constructor
+    // 🔴 Missing fields (now added)
+    private String requiredSkill;
+    private String requiredSkillLevel;
+    private String status;
+
     public TaskRecord() {
     }
 
-    // Parameterized constructor
-    public TaskRecord(String taskName, String priority) {
+    public TaskRecord(String taskName, String priority,
+                      String requiredSkill, String requiredSkillLevel) {
         this.taskName = taskName;
         this.priority = priority;
+        this.requiredSkill = requiredSkill;
+        this.requiredSkillLevel = requiredSkillLevel;
+        this.status = "PENDING";
     }
 
-    // Getters
+    // ---------- Getters ----------
     public Long getId() {
         return id;
     }
@@ -115,7 +122,19 @@ public class TaskRecord {
         return priority;
     }
 
-    // Setters
+    public String getRequiredSkill() {
+        return requiredSkill;
+    }
+
+    public String getRequiredSkillLevel() {
+        return requiredSkillLevel;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    // ---------- Setters ----------
     public void setId(Long id) {
         this.id = id;
     }
@@ -127,5 +146,16 @@ public class TaskRecord {
     public void setPriority(String priority) {
         this.priority = priority;
     }
+
+    public void setRequiredSkill(String requiredSkill) {
+        this.requiredSkill = requiredSkill;
+    }
+
+    public void setRequiredSkillLevel(String requiredSkillLevel) {
+        this.requiredSkillLevel = requiredSkillLevel;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
- 
