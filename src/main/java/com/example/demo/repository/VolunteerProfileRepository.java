@@ -1,12 +1,32 @@
+// // package com.example.demo.repository;
+
+// // import com.example.demo.model.VolunteerProfile;
+// // import org.springframework.data.jpa.repository.JpaRepository;
+
+// // import java.util.List;
+// // import java.util.Optional;
+
+// // public interface VolunteerProfileRepository extends JpaRepository<VolunteerProfile, Long> {
+
+// //     boolean existsByVolunteerId(String volunteerId);
+
+// //     boolean existsByEmail(String email);
+
+// //     boolean existsByPhone(String phone);
+
+// //     Optional<VolunteerProfile> findByVolunteerId(String volunteerId);
+
+// //     List<VolunteerProfile> findByAvailabilityStatus(String status);
+// // }
 // package com.example.demo.repository;
 
 // import com.example.demo.model.VolunteerProfile;
 // import org.springframework.data.jpa.repository.JpaRepository;
 
 // import java.util.List;
-// import java.util.Optional;
 
-// public interface VolunteerProfileRepository extends JpaRepository<VolunteerProfile, Long> {
+// public interface VolunteerProfileRepository
+//         extends JpaRepository<VolunteerProfile, Long> {
 
 //     boolean existsByVolunteerId(String volunteerId);
 
@@ -14,27 +34,30 @@
 
 //     boolean existsByPhone(String phone);
 
-//     Optional<VolunteerProfile> findByVolunteerId(String volunteerId);
+//     VolunteerProfile findByVolunteerId(String volunteerId);
 
-//     List<VolunteerProfile> findByAvailabilityStatus(String status);
+//     List<VolunteerProfile> findByAvailabilityStatus(String availabilityStatus);
 // }
 package com.example.demo.repository;
 
 import com.example.demo.model.VolunteerProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 
-public interface VolunteerProfileRepository
-        extends JpaRepository<VolunteerProfile, Long> {
-
+@Repository
+public interface VolunteerProfileRepository extends JpaRepository<VolunteerProfile, Long> {
+    
+    List<VolunteerProfile> findByAvailabilityStatus(String status);
+    
+    Optional<VolunteerProfile> findByVolunteerId(String volunteerId);
+    
+    Optional<VolunteerProfile> findByEmail(String email);
+    
     boolean existsByVolunteerId(String volunteerId);
-
+    
     boolean existsByEmail(String email);
-
+    
     boolean existsByPhone(String phone);
-
-    VolunteerProfile findByVolunteerId(String volunteerId);
-
-    List<VolunteerProfile> findByAvailabilityStatus(String availabilityStatus);
 }
